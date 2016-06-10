@@ -4,6 +4,7 @@ namespace BaklavaBorekBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * MailDetail
@@ -24,6 +25,36 @@ class MailDetail extends CreatedUpdatedDeletedAt
      */
     private $id;
 
+    /**
+     * @var int
+     *
+     * @ORM\OneToOne(targetEntity="Order")
+     * @ORM\JoinColumn(name="order_id", referencedColumnName="id")
+     */
+    private $oder;
+
+    /**
+     * @var int
+     *
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumn(name="mail_sent_by", referencedColumnName="id")
+     */
+    private $mailSentBy;
+
+    /**
+     * @var \DateTime $mailDate
+     *
+     * @ORM\Column(type="datetime")
+     */
+    private $mailDate;
+
+
+    /**
+     * @var String
+     *
+     * @ORM\Column(type="text")
+     */
+    private $mailBody;
 
     /**
      * Get id
@@ -34,4 +65,69 @@ class MailDetail extends CreatedUpdatedDeletedAt
     {
         return $this->id;
     }
+
+    /**
+     * @return int
+     */
+    public function getOder()
+    {
+        return $this->oder;
+    }
+
+    /**
+     * @param int $oder
+     */
+    public function setOder($oder)
+    {
+        $this->oder = $oder;
+    }
+
+    /**
+     * @return int
+     */
+    public function getMailSentBy()
+    {
+        return $this->mailSentBy;
+    }
+
+    /**
+     * @param int $mailSentBy
+     */
+    public function setMailSentBy($mailSentBy)
+    {
+        $this->mailSentBy = $mailSentBy;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getMailDate()
+    {
+        return $this->mailDate;
+    }
+
+    /**
+     * @param \DateTime $mailDate
+     */
+    public function setMailDate($mailDate)
+    {
+        $this->mailDate = $mailDate;
+    }
+
+    /**
+     * @return String
+     */
+    public function getMailBody()
+    {
+        return $this->mailBody;
+    }
+
+    /**
+     * @param String $mailBody
+     */
+    public function setMailBody($mailBody)
+    {
+        $this->mailBody = $mailBody;
+    }
+
 }

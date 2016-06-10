@@ -7,14 +7,14 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Measurement
+ * Product
  *
- * @ORM\Table(name="measurement")
- * @ORM\Entity(repositoryClass="BaklavaBorekBundle\Repository\MeasurementRepository")
+ * @ORM\Table(name="product")
+ * @ORM\Entity(repositoryClass="BaklavaBorekBundle\Repository\ProductRepository")
  * @ORM\HasLifecycleCallbacks
  * @Gedmo\SoftDeleteable(fieldName="deletedAt")
  */
-class Measurement extends CreatedUpdatedDeletedAt
+class Product extends CreatedUpdatedDeletedAt
 {
     /**
      * @var int
@@ -25,7 +25,7 @@ class Measurement extends CreatedUpdatedDeletedAt
      */
     private $id;
 
-    //tepsi
+    //baklava
     /**
      * @var String
      *
