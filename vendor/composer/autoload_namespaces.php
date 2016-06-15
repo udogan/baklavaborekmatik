@@ -18,4 +18,5 @@ return array(
     'Doctrine\\Common\\Annotations\\' => array($vendorDir . '/doctrine/annotations/lib'),
     'Doctrine\\Common\\' => array($vendorDir . '/doctrine/common/lib'),
     'Behat\\Transliterator' => array($vendorDir . '/behat/transliterator/src'),
+    'Assetic' => array($vendorDir . '/kriswallsmith/assetic/src'),
 );
