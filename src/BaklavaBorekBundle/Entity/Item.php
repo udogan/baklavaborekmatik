@@ -52,6 +52,13 @@ class Item extends CreatedUpdatedDeletedAt
     private $product;
 
     /**
+     * @var int
+     * @ORM\ManyToOne(targetEntity="Order", inversedBy="item")
+     * @ORM\JoinColumn(name="order_id", referencedColumnName="id")
+     */
+    private $order;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -107,6 +114,22 @@ class Item extends CreatedUpdatedDeletedAt
     public function setProduct($product)
     {
         $this->product = $product;
+    }
+
+    /**
+     * @return int
+     */
+    public function getOrder()
+    {
+        return $this->order;
+    }
+
+    /**
+     * @param int $order
+     */
+    public function setOrder($order)
+    {
+        $this->order = $order;
     }
 
 }

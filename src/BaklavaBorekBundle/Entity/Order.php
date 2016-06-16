@@ -36,8 +36,7 @@ class Order extends CreatedUpdatedDeletedAt
     /**
      * @var int
      *
-     * @ORM\OneToMany(targetEntity="Item")
-     * @ORM\JoinColumn(name="item_id", referencedColumnName="id")
+     * @ORM\OneToMany(targetEntity="Item", mappedBy="order")
      */
     private $item;
 
