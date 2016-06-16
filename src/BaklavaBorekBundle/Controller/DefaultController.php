@@ -12,6 +12,6 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('BaklavaBorekBundle:Default:index.html.twig');
+        return $this->render('BaklavaBorekBundle::layout.html.twig');
     }
 }
