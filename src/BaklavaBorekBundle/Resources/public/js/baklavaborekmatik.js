@@ -35,6 +35,19 @@ var BaklavaBorekMatik = {
     onReady: function() {
         var userDataTable = jQuery.extend(this.defaultDataTableOptions(), {"order": [4, "desc"]});
         jQuery(".user-data-table").dataTable(userDataTable);
+
+        jQuery('#wizard').smartWizard();
+        jQuery('.buttonNext').addClass('btn btn-success');
+        jQuery('.buttonPrevious').addClass('btn btn-primary');
+        jQuery('.buttonFinish').addClass('btn btn-default');
+
+        $('#single_cal3').daterangepicker({
+            singleDatePicker: true,
+            calender_style: "picker_3"
+        }, function(start, end, label) {
+            console.log(start.toISOString(), end.toISOString(), label);
+        });
+
     }
 };
 

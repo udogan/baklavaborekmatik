@@ -12,12 +12,14 @@ class OrderType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+          ->add("userId", 'entity', array(
+            "class" => 'BaklavaBorekBundle:User'
+          ))
           ->add("item", 'entity', array(
             "class" => 'BaklavaBorekBundle:Item'
           ))
-          ->add("userId", 'entity', array(
-              "class" => 'BaklavaBorekBundle:User'
-          ));
+          ->add('willPurchaseDate', 'date')
+          ->add('purchaseDate', 'date');
     }
 
     public function configureOptions(OptionsResolver $resolver)
