@@ -7,7 +7,8 @@ var BaklavaBorekMatik = {
         "(filtered from _MAX_ total entries)": "(toplam _MAX_ satırdan filtrelendi)",
         "Search:": "Ara:",
         "Previous": "Önceki",
-        "Next": "Sonraki"
+        "Next": "Sonraki",
+        "Finish": "Bitti"
     },
     __: function(key) {
         if (!!this.translations) {
@@ -32,22 +33,71 @@ var BaklavaBorekMatik = {
             }
         };
     },
+    addItemFormDeleteLink: function(tagFormLi) {
+        var removeFormA = $('<a href="javascript:void(0)">' + this.__('delete this tag') + '</a>');
+        tagFormLi.append(removeFormA);
+
+        removeFormA.on('click', function(e) {
+            e.preventDefault();
+            tagFormLi.remove();
+        });
+    },
+    addItemToOrderForm: function(collectionHolder, newLinkLi) {
+        var prototype = collectionHolder.data('prototype');
+
+        var index = collectionHolder.data('index');
+        var newForm = prototype.replace(/__name__/g, index);
+
+        collectionHolder.data('index', index + 1);
+        var newFormLi = jQuery('<li></li>').append(newForm);
+        newLinkLi.before(newFormLi);
+        this.addItemFormDeleteLink(newFormLi);
+    },
+    prepareOrderFormItems: function() {
+        var collectionHolder;
+        var self = this;
+
+        // setup an "add a tag" link
+        var addTagLink = jQuery('<a href="javascript:void(0)" class="add_order_item_link">' + this.__('Add a tag') + '</a>');
+        var newLinkLi = jQuery('<li></li>').append(addTagLink);
+
+        collectionHolder = jQuery('#order-form-wrapper ul.items');
+
+        collectionHolder.find('li').each(function() {
+            self.addItemFormDeleteLink(jQuery(this));
+        });
+
+        collectionHolder.append(newLinkLi);
+
+        collectionHolder.data('index', collectionHolder.find(':input').length);
+
+        addTagLink.on('click', function(e) {
+            e.preventDefault();
+            self.addItemToOrderForm(collectionHolder, newLinkLi);
+        });
+    },
     onReady: function() {
+        var self = this;
         var userDataTable = jQuery.extend(this.defaultDataTableOptions(), {"order": [4, "desc"]});
         jQuery(".user-data-table").dataTable(userDataTable);
 
-        jQuery('#wizard').smartWizard();
-        jQuery('.buttonNext').addClass('btn btn-success');
-        jQuery('.buttonPrevious').addClass('btn btn-primary');
-        jQuery('.buttonFinish').addClass('btn btn-default');
+        /*jQuery('#order-form-step-widget #wizard').smartWizard({
+            labelNext:self.__('Next'), // label for Next button
+            labelPrevious:self.__('Previous'), // label for Previous button
+            labelFinish:self.__('Finish'),
+        });
+        jQuery('#order-form-step-widget .buttonNext').addClass('btn btn-success pull-right');
+        jQuery('#order-form-step-widget .buttonPrevious').addClass('btn btn-primary');
+        jQuery('#order-form-step-widget .buttonFinish').addClass('btn btn-default pull-right');*/
 
-        $('#single_cal3').daterangepicker({
+        jQuery('.date-range-picker').daterangepicker({
             singleDatePicker: true,
             calender_style: "picker_3"
-        }, function(start, end, label) {
-            console.log(start.toISOString(), end.toISOString(), label);
         });
 
+        if (jQuery("#order-form-wrapper").length) {
+            this.prepareOrderFormItems();
+        }
     }
 };
 

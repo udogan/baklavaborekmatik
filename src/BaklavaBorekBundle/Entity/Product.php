@@ -61,4 +61,8 @@ class Product extends CreatedUpdatedDeletedAt
         $this->name = $name;
     }
 
+    public function __toString()
+    {
+        return $this->name;
+    }
 }

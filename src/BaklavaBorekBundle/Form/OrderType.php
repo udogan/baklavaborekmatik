@@ -13,13 +13,26 @@ class OrderType extends AbstractType
     {
         $builder
           ->add("userId", 'entity', array(
-            "class" => 'BaklavaBorekBundle:User'
+              "class" => 'BaklavaBorekBundle:User',
+              "label" => false
           ))
-          ->add("item", 'entity', array(
-            "class" => 'BaklavaBorekBundle:Item'
+          ->add("item", 'collection', array(
+              "entry_type" => ItemType::class,
+              "allow_add" => true,
+              "allow_delete" => true,
+              "by_reference" => false,
           ))
-          ->add('willPurchaseDate', 'date')
-          ->add('purchaseDate', 'date');
+          ->add('willPurchaseDate', 'date', array(
+              'widget' => 'single_text',
+              'html5' => false,
+              "required" => false,
+              "label" => false
+          ))
+          ->add('purchaseDate', 'date', array(
+              'widget' => 'single_text',
+              'html5' => false,
+              "label" => false
+          ));
     }
 
     public function configureOptions(OptionsResolver $resolver)

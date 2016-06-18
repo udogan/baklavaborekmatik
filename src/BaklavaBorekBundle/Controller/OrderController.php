@@ -2,6 +2,7 @@
 
 namespace BaklavaBorekBundle\Controller;
 
+use BaklavaBorekBundle\Entity\Item;
 use BaklavaBorekBundle\Entity\Order;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -34,17 +35,12 @@ class OrderController extends Controller
     public function createAction(Request $request)
     {
         $order = new Order();
-
-        /*$em = $this->getDoctrine()->getManager();
-        $repository = $em->getRepository("BaklavaBorekBundle:User");
-        $users = $repository->findAll();
-        foreach ($users as $user) {
-            $order->getUsers()->add($user);
-        }*/
-
         $form = $this->createForm('BaklavaBorekBundle\Form\OrderType', $order);
 
         $form->handleRequest($request);
+
+        var_dump($order->getItem());
+        exit;
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($order);
@@ -53,7 +49,7 @@ class OrderController extends Controller
         }
 
         return $this->render('BaklavaBorekBundle:Order:create.html.twig', array(
-          "form" => $form->createView()
+            "form" => $form->createView()
         ));
     }
 }

@@ -2,6 +2,7 @@
 
 namespace BaklavaBorekBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -34,9 +35,9 @@ class Order extends CreatedUpdatedDeletedAt
     private $userId;
 
     /**
-     * @var int
+     * @var array
      *
-     * @ORM\OneToMany(targetEntity="Item", mappedBy="order")
+     * @ORM\OneToMany(targetEntity="Item", mappedBy="order", cascade={"persist"})
      */
     private $item;
 
@@ -53,6 +54,11 @@ class Order extends CreatedUpdatedDeletedAt
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $purchaseDate;
+
+    public function __construct()
+    {
+        $this->item = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -126,6 +132,17 @@ class Order extends CreatedUpdatedDeletedAt
     public function setPurchaseDate($purchaseDate)
     {
         $this->purchaseDate = $purchaseDate;
+    }
+
+    public function addItem(Item $item)
+    {
+        $item->setOrder($this);
+        $this->item->add($item);
+    }
+
+    public function removeItem(Item $item)
+    {
+        $this->item->removeElement($item);
     }
 
 }
