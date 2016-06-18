@@ -12,6 +12,7 @@ namespace BaklavaBorekBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class ItemType extends AbstractType
 {
@@ -19,7 +20,11 @@ class ItemType extends AbstractType
     {
         $builder
             ->add("quantity", 'integer', array(
-                "label" => false
+                "label" => false,
+                "constraints" => array(
+                  new Assert\Type('integer'),
+                  new Assert\Range(array("min" => 1))
+                )
             ))
             ->add("measurement", 'entity', array(
                 "class" => 'BaklavaBorekBundle:Measurement',

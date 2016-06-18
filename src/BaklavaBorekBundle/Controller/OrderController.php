@@ -36,11 +36,8 @@ class OrderController extends Controller
     {
         $order = new Order();
         $form = $this->createForm('BaklavaBorekBundle\Form\OrderType', $order);
-
         $form->handleRequest($request);
 
-        var_dump($order->getItem());
-        exit;
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($order);

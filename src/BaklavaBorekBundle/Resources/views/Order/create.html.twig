@@ -1,13 +1,36 @@
 {% extends "BaklavaBorekBundle::layout.html.twig" %}
 
 {% block content %}
-    <div id="order-form-wrapper" xmlns="http://www.w3.org/1999/html">
+    <div id="order-form-wrapper">
         {{ form_start(form, {'attr': {'class': 'form-horizontal form-label-left'}}) }}
-        <ul class="items" data-prototype="{{ form_widget(form.item.vars.prototype)|e('html_attr') }}">
-            {% for item in form.item%}
-                <li>{{ form_row(item) }}</li>
-            {% endfor %}
-        </ul>
+        <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="order_userId">{{ "User" | trans }}<span class="required">*</span></label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                {{ form_row(form.userId, {'attr': {'class': 'form-control col-md-7 col-xs-12', 'required': 'required'}}) }}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="order_willPurchaseDate">{{ "Will Purchase Date" | trans }}<span class="required">*</span></label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                {{ form_row(form.willPurchaseDate, {'attr': {'class': 'form-control col-md-7 col-xs-12', 'required': 'required'}}) }}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="order_purchaseDate">{{ "Purchase Date" | trans }}</label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                {{ form_row(form.purchaseDate, {'attr': {'class': 'form-control col-md-7 col-xs-12'}}) }}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12">{{ "Items" | trans }}</label>
+            <ul class="items" data-prototype="{% filter escape %}{{ include('BaklavaBorekBundle:Order:prototype.html.twig', { 'item': form.item.vars.prototype }) }}{% endfilter %}">
+                {% for item in form.item%}
+                    <li>
+                        {{ include('BaklavaBorekBundle:Order:prototype.html.twig', { 'item': item }) }}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
         <input type="submit" title="submit">
         {{ form_end(form) }}
     </div>

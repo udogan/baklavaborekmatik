@@ -34,7 +34,7 @@ var BaklavaBorekMatik = {
         };
     },
     addItemFormDeleteLink: function(tagFormLi) {
-        var removeFormA = $('<a href="javascript:void(0)">' + this.__('delete this tag') + '</a>');
+        var removeFormA = $('<a href="javascript:void(0)">' + this.__('Delete this item') + '</a>');
         tagFormLi.append(removeFormA);
 
         removeFormA.on('click', function(e) {
@@ -57,13 +57,12 @@ var BaklavaBorekMatik = {
         var collectionHolder;
         var self = this;
 
-        // setup an "add a tag" link
-        var addTagLink = jQuery('<a href="javascript:void(0)" class="add_order_item_link">' + this.__('Add a tag') + '</a>');
+        var addTagLink = jQuery('<a href="javascript:void(0)" class="add_order_item_link">' + this.__('Add an item') + '</a>');
         var newLinkLi = jQuery('<li></li>').append(addTagLink);
 
         collectionHolder = jQuery('#order-form-wrapper ul.items');
 
-        collectionHolder.find('li').each(function() {
+        collectionHolder.find('> li').each(function() {
             self.addItemFormDeleteLink(jQuery(this));
         });
 
@@ -80,20 +79,6 @@ var BaklavaBorekMatik = {
         var self = this;
         var userDataTable = jQuery.extend(this.defaultDataTableOptions(), {"order": [4, "desc"]});
         jQuery(".user-data-table").dataTable(userDataTable);
-
-        /*jQuery('#order-form-step-widget #wizard').smartWizard({
-            labelNext:self.__('Next'), // label for Next button
-            labelPrevious:self.__('Previous'), // label for Previous button
-            labelFinish:self.__('Finish'),
-        });
-        jQuery('#order-form-step-widget .buttonNext').addClass('btn btn-success pull-right');
-        jQuery('#order-form-step-widget .buttonPrevious').addClass('btn btn-primary');
-        jQuery('#order-form-step-widget .buttonFinish').addClass('btn btn-default pull-right');*/
-
-        jQuery('.date-range-picker').daterangepicker({
-            singleDatePicker: true,
-            calender_style: "picker_3"
-        });
 
         if (jQuery("#order-form-wrapper").length) {
             this.prepareOrderFormItems();

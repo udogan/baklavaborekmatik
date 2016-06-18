@@ -17,21 +17,20 @@ class OrderType extends AbstractType
               "label" => false
           ))
           ->add("item", 'collection', array(
-              "entry_type" => ItemType::class,
+              "entry_type" => 'BaklavaBorekBundle\Form\ItemType',
               "allow_add" => true,
               "allow_delete" => true,
               "by_reference" => false,
+              "label" => false
           ))
           ->add('willPurchaseDate', 'date', array(
               'widget' => 'single_text',
-              'html5' => false,
-              "required" => false,
               "label" => false
           ))
           ->add('purchaseDate', 'date', array(
               'widget' => 'single_text',
-              'html5' => false,
-              "label" => false
+              "label" => false,
+              "required" => false
           ));
     }
 

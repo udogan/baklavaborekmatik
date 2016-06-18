@@ -30,7 +30,6 @@ class Item extends CreatedUpdatedDeletedAt
      * @var int
      *
      * @ORM\Column(name="quantity", type="integer")
-     * @Assert\Range(min=1)
      */
     private $quantity;
 
