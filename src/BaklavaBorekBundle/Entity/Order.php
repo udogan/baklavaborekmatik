@@ -37,7 +37,7 @@ class Order extends CreatedUpdatedDeletedAt
     /**
      * @var array
      *
-     * @ORM\OneToMany(targetEntity="Item", mappedBy="order", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Item", mappedBy="order", cascade={"persist", "remove"})
      */
     private $item;
 

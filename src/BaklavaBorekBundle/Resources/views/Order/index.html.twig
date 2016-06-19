@@ -6,8 +6,7 @@
     <table class="order-data-table table table-striped table-bordered">
         <thead>
         <tr>
-            <th>{{ "Name" | trans }}</th>
-            <th>{{ "Surname" | trans }}</th>
+            <th>{{ "Name Surname" | trans }}</th>
             <th>{{ "Items" | trans }}</th>
             <th>{{ "Will Purchase Date" | trans }}</th>
             <th>{{ "Purchase Date" | trans }}</th>
@@ -19,8 +18,7 @@
         <tbody>
         {% for order in orders %}
             <tr>
-                <td>{{ order.userId.name }}</td>
-                <td>{{ order.userId.surname }}</td>
+                <td>{{ order.userId }}</td>
                 <td>{{ order.item|join("\n")|nl2br }}</td>
                 <td>{{ order.willPurchaseDate|date('Y-m-d') }}</td>
                 <td>
