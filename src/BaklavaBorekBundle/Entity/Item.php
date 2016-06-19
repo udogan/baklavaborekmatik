@@ -40,7 +40,7 @@ class Item extends CreatedUpdatedDeletedAt
      * @ORM\ManyToOne(targetEntity="Measurement")
      * @ORM\JoinColumn(name="measurement_id", referencedColumnName="id")
      */
-    private $measurementId;
+    private $measurement;
 
     // baklava
     /**
@@ -87,17 +87,17 @@ class Item extends CreatedUpdatedDeletedAt
     /**
      * @return int
      */
-    public function getMeasurementId()
+    public function getMeasurement()
     {
-        return $this->measurementId;
+        return $this->measurement;
     }
 
     /**
-     * @param int $measurementId
+     * @param int $measurement
      */
-    public function setMeasurementId($measurementId)
+    public function setMeasurement($measurement)
     {
-        $this->measurementId = $measurementId;
+        $this->measurement = $measurement;
     }
 
     /**
@@ -132,4 +132,8 @@ class Item extends CreatedUpdatedDeletedAt
         $this->order = $order;
     }
 
+    public function __toString()
+    {
+        return $this->quantity . " " . $this->measurement . " " . $this->product;
+    }
 }

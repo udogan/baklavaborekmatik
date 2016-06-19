@@ -2,6 +2,7 @@
 
 namespace BaklavaBorekBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -9,7 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Order
  *
- * @ORM\Table(name="order")
+ * @ORM\Table(name="`order`")
  * @ORM\Entity(repositoryClass="BaklavaBorekBundle\Repository\OrderRepository")
  * @ORM\HasLifecycleCallbacks
  * @Gedmo\SoftDeleteable(fieldName="deletedAt")
@@ -34,9 +35,9 @@ class Order extends CreatedUpdatedDeletedAt
     private $userId;
 
     /**
-     * @var int
+     * @var array
      *
-     * @ORM\OneToMany(targetEntity="Item", mappedBy="order")
+     * @ORM\OneToMany(targetEntity="Item", mappedBy="order", cascade={"persist", "remove"})
      */
     private $item;
 
@@ -53,6 +54,16 @@ class Order extends CreatedUpdatedDeletedAt
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $purchaseDate;
+
+    /**
+     * @ORM\OneToOne(targetEntity="MailDetail", mappedBy="order", cascade={"persist", "remove"})
+     */
+    private $mailDetail;
+
+    public function __construct()
+    {
+        $this->item = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -126,6 +137,34 @@ class Order extends CreatedUpdatedDeletedAt
     public function setPurchaseDate($purchaseDate)
     {
         $this->purchaseDate = $purchaseDate;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMailDetail()
+    {
+        return $this->mailDetail;
+    }
+
+    /**
+     * @param mixed $mailDetail
+     */
+    public function setMailDetail(MailDetail $mailDetail)
+    {
+        $mailDetail->setOrder($this);
+        $this->mailDetail = $mailDetail;
+    }
+
+    public function addItem(Item $item)
+    {
+        $item->setOrder($this);
+        $this->item->add($item);
+    }
+
+    public function removeItem(Item $item)
+    {
+        $this->item->removeElement($item);
     }
 
 }

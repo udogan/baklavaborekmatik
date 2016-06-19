@@ -1,0 +1,22 @@
+<div class="item-errors">
+    {{ form_errors(item.quantity) }}
+    {{ form_errors(item.measurement) }}
+    {{ form_errors(item.product) }}
+</div>
+<div class="order-item">
+    <div class="item-quantity-wrapper form-group">
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            {{ form_widget(item.quantity, {'attr': {'class': 'form-control col-md-7 col-xs-12',  'required': 'required', 'min': 1}}) }}
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            {{ form_row(item.measurement, {'attr': {'class': 'form-control col-md-7 col-xs-12', 'required': 'required'}}) }}
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            {{ form_row(item.product, {'attr': {'class': 'form-control col-md-7 col-xs-12', 'required': 'required'}}) }}
+        </div>
+    </div>
+</div>

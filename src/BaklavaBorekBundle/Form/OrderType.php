@@ -8,18 +8,33 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class OrderType extends AbstractType
 {
-
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
           ->add("userId", 'entity', array(
-            "class" => 'BaklavaBorekBundle:User'
+              "class" => 'BaklavaBorekBundle:User',
+              "label" => false
           ))
-          ->add("item", 'entity', array(
-            "class" => 'BaklavaBorekBundle:Item'
+          ->add("item", 'collection', array(
+              "entry_type" => 'BaklavaBorekBundle\Form\ItemType',
+              "allow_add" => true,
+              "allow_delete" => true,
+              "by_reference" => false,
+              "label" => false
           ))
-          ->add('willPurchaseDate', 'date')
-          ->add('purchaseDate', 'date');
+          ->add('willPurchaseDate', 'date', array(
+              'widget' => 'single_text',
+              "label" => false
+          ))
+          ->add('purchaseDate', 'date', array(
+              'widget' => 'single_text',
+              "label" => false,
+              "required" => false
+          ))
+          ->add("mailDetail", 'BaklavaBorekBundle\Form\MailDetailType', array(
+              'data_class' => 'BaklavaBorekBundle\Entity\MailDetail',
+              "label" => false
+          ));
     }
 
     public function configureOptions(OptionsResolver $resolver)

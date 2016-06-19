@@ -5,3 +5,41 @@
 .index-create-user button {
 	margin-bottom: 20px;
 }
+
+#order-form-wrapper .items .item-errors ul {
+	padding-left: 5%;
+}
+
+#order-form-wrapper .items > li {
+	clear: both;
+	width: 50%;
+	margin: 0 auto;
+	list-style-type: none;
+}
+
+#order-form-wrapper .items .order-item ul {
+	padding-left: 0;
+}
+
+#order-form-wrapper .items .form-group {
+	float: left;
+}
+
+#order-form-wrapper .items .form-group > div {
+	display: inline;
+	float: left;
+	width: 100%;
+}
+
+#order-form-wrapper .items .item-quantity-wrapper {
+	width: 15%;
+}
+
+#order-form-wrapper .items .form-group input,
+#order-form-wrapper .items .form-group select {
+	float: left;
+}
+
+#order-form-wrapper .global-form-erors {
+	font-weight: bold;
+}
