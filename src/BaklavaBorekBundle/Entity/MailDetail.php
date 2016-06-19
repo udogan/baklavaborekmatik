@@ -31,7 +31,7 @@ class MailDetail extends CreatedUpdatedDeletedAt
      * @ORM\OneToOne(targetEntity="Order")
      * @ORM\JoinColumn(name="order_id", referencedColumnName="id")
      */
-    private $oder;
+    private $order;
 
     /**
      * @var int
@@ -69,17 +69,17 @@ class MailDetail extends CreatedUpdatedDeletedAt
     /**
      * @return int
      */
-    public function getOder()
+    public function getOrder()
     {
-        return $this->oder;
+        return $this->order;
     }
 
     /**
-     * @param int $oder
+     * @param int $order
      */
-    public function setOder($oder)
+    public function setOrder($order)
     {
-        $this->oder = $oder;
+        $this->order = $order;
     }
 
     /**

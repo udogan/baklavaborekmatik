@@ -2,36 +2,80 @@
 
 {% block content %}
     <div id="order-form-wrapper">
+        <div class="global-form-erors">
+            {{ form_errors(form, {'attr': {'class': 'error'}}) }}
+        </div>
         {{ form_start(form, {'attr': {'class': 'form-horizontal form-label-left'}}) }}
-        <div class="form-group">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="order_userId">{{ "User" | trans }}<span class="required">*</span></label>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-                {{ form_row(form.userId, {'attr': {'class': 'form-control col-md-7 col-xs-12', 'required': 'required'}}) }}
+        <div class="row">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>{% block order_form_name %}{{ "Create Order Details" | trans }}{% endblock %}</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="order_userId">{{ "User" | trans }}<span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            {{ form_row(form.userId, {'attr': {'class': 'form-control col-md-7 col-xs-12', 'required': 'required'}}) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="order_willPurchaseDate">{{ "Will Purchase Date" | trans }}<span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            {{ form_row(form.willPurchaseDate, {'attr': {'class': 'form-control col-md-7 col-xs-12', 'required': 'required'}}) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="order_purchaseDate">{{ "Purchase Date" | trans }}</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            {{ form_row(form.purchaseDate, {'attr': {'class': 'form-control col-md-7 col-xs-12'}}) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">{{ "Items" | trans }}</label>
+                        <ul class="items" data-prototype="{% filter escape %}{{ include('BaklavaBorekBundle:Order:prototype.html.twig', { 'item': form.item.vars.prototype }) }}{% endfilter %}">
+                            {% for item in form.item%}
+                                <li>
+                                    {{ include('BaklavaBorekBundle:Order:prototype.html.twig', { 'item': item }) }}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="x_title">
+                    <h2>{% block mail_detail_form_name %}{{ "Create Mail Details" | trans }}{% endblock %}</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="mailDetail_mailSentBy">{{ "Mail Sent By" | trans }}<span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            {{ form_row(form.mailDetail.mailSentBy, {'attr': {'class': 'form-control col-md-7 col-xs-12', 'required': 'required'}}) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="mailDetail_mailDate">{{ "Mail Date" | trans }}<span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            {{ form_row(form.mailDetail.mailDate, {'attr': {'class': 'form-control col-md-7 col-xs-12', 'required': 'required'}}) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="mailDetail_mailDate">{{ "Mail Body" | trans }}<span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            {{ form_row(form.mailDetail.mailBody, {'attr': {'class': 'form-control col-md-7 col-xs-12', 'required': 'required'}}) }}
+                        </div>
+                    </div>
+                    <div class="ln_solid"></div>
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                            <a href="{{ path('BaklavaBorekBundle_Order_index') }}"><button type="button" class="btn btn-primary">{{ "Cancel" | trans }}</button></a>
+                            <button type="submit" class="btn btn-success">{{ "Save" | trans }}</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="form-group">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="order_willPurchaseDate">{{ "Will Purchase Date" | trans }}<span class="required">*</span></label>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-                {{ form_row(form.willPurchaseDate, {'attr': {'class': 'form-control col-md-7 col-xs-12', 'required': 'required'}}) }}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="order_purchaseDate">{{ "Purchase Date" | trans }}</label>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-                {{ form_row(form.purchaseDate, {'attr': {'class': 'form-control col-md-7 col-xs-12'}}) }}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12">{{ "Items" | trans }}</label>
-            <ul class="items" data-prototype="{% filter escape %}{{ include('BaklavaBorekBundle:Order:prototype.html.twig', { 'item': form.item.vars.prototype }) }}{% endfilter %}">
-                {% for item in form.item%}
-                    <li>
-                        {{ include('BaklavaBorekBundle:Order:prototype.html.twig', { 'item': item }) }}
-                    </li>
-                {% endfor %}
-            </ul>
-        </div>
-        <input type="submit" title="submit">
         {{ form_end(form) }}
     </div>
 {% endblock %}

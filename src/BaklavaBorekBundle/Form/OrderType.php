@@ -8,7 +8,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class OrderType extends AbstractType
 {
-
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -31,6 +30,10 @@ class OrderType extends AbstractType
               'widget' => 'single_text',
               "label" => false,
               "required" => false
+          ))
+          ->add("mailDetail", 'BaklavaBorekBundle\Form\MailDetailType', array(
+              'data_class' => 'BaklavaBorekBundle\Entity\MailDetail',
+              "label" => false
           ));
     }
 

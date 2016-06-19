@@ -39,3 +39,7 @@
 #order-form-wrapper .items .form-group select {
 	float: left;
 }
+
+#order-form-wrapper .global-form-erors {
+	font-weight: bold;
+}

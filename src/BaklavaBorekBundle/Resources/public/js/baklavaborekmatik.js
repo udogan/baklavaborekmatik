@@ -80,6 +80,9 @@ var BaklavaBorekMatik = {
         var userDataTable = jQuery.extend(this.defaultDataTableOptions(), {"order": [4, "desc"]});
         jQuery(".user-data-table").dataTable(userDataTable);
 
+        var orderDataTable = jQuery.extend(this.defaultDataTableOptions(), {"order": [3, "desc"]});
+        jQuery(".order-data-table").dataTable(orderDataTable);
+
         if (jQuery("#order-form-wrapper").length) {
             this.prepareOrderFormItems();
         }

@@ -131,4 +131,9 @@ class Item extends CreatedUpdatedDeletedAt
     {
         $this->order = $order;
     }
+
+    public function __toString()
+    {
+        return $this->quantity . " " . $this->measurement . " " . $this->product;
+    }
 }
