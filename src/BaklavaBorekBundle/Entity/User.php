@@ -110,6 +110,6 @@ class User extends CreatedUpdatedDeletedAt
     }
 
     public function __toString() {
-        return "(" . $this->id . ") " . $this->name . " " . $this->surname;
+        return $this->name . " " . $this->surname;
     }
 }

@@ -43,3 +43,23 @@
 #order-form-wrapper .global-form-erors {
 	font-weight: bold;
 }
+
+.fc-content .fc-time{
+	display : none;
+}
+
+.dashboard-calendar-detail-title {
+	font-weight: 700;
+	width: 25%;
+	text-align: right;
+	margin-right: 20px;
+}
+
+.dashboard-calendar-detail-wrapper {
+	clear: both;
+}
+
+.dashboard-calendar-detail-wrapper div {
+	float: left;
+	margin-bottom: 15px;
+}

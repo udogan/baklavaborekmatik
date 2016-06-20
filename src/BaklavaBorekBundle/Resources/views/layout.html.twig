@@ -21,6 +21,9 @@
         <link href="{{ asset('bundles/baklavaborek/css/maps/jquery-jvectormap-2.0.3.css') }}" rel="stylesheet"/>
         <!-- Datatables -->
         <link href="{{ asset('bundles/baklavaborek/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css') }}" rel="stylesheet"/>
+        <!-- FullCalendar -->
+        <link href="{{ asset('bundles/baklavaborek/vendors/fullcalendar/dist/fullcalendar.min.css') }}" rel="stylesheet"/>
+        <link href="{{ asset('bundles/baklavaborek/vendors/fullcalendar/dist/fullcalendar.print.css') }}" rel="stylesheet" media="print"/>
         <!-- Custom Theme Style -->
         <link href="{{ asset('bundles/baklavaborek/build/css/custom.min.css') }}" rel="stylesheet"/>
         <!-- BaklavaBorekMatik Style -->
@@ -42,10 +45,10 @@
                             <div class="menu_section">
                                 <h3>General</h3>
                                 <ul class="nav side-menu">
-                                    <li><a href="/"><i class="fa fa-desktop"></i> Dashboard</a></li>
-                                    <li><a href="{{ path('BaklavaBorekBundle_User_index') }}"><i class="fa fa-user"></i> User</a></li>
-                                    <li><a href="{{ path('BaklavaBorekBundle_Order_index') }}"><i class="fa fa-cutlery"></i> Order</a></li>
-                                    <li><a><i class="fa fa-bar-chart-o"></i> Reports</a></li>
+                                    <li><a href="/"><i class="fa fa-desktop"></i> {{ "Dashboard" | trans }}</a></li>
+                                    <li><a href="{{ path('BaklavaBorekBundle_User_index') }}"><i class="fa fa-user"></i> {{ "User" | trans }}</a></li>
+                                    <li><a href="{{ path('BaklavaBorekBundle_Order_index') }}"><i class="fa fa-cutlery"></i> {{ "Order" | trans }}</a></li>
+                                    <li><a><i class="fa fa-bar-chart-o"></i> {{ "Report" | trans }}</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -119,6 +122,10 @@
         <script src="{{ asset('bundles/baklavaborek/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
         <!-- jQuery Smart Wizard -->
         <script src="{{ asset('bundles/baklavaborek/vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js') }}"></script>
+        <!-- FullCalendar -->
+        <script src="{{ asset('bundles/baklavaborek/vendors/moment/min/moment.min.js') }}"></script>
+        <script src="{{ asset('bundles/baklavaborek/vendors/fullcalendar/dist/fullcalendar.min.js') }}"></script>
+        <script src="{{ asset('bundles/baklavaborek/vendors/fullcalendar/dist/lang/tr.js') }}"></script>
         <!-- Custom Theme Scripts -->
         <script src="{{ asset('bundles/baklavaborek/build/js/custom.min.js') }}"></script>
         <!-- BaklavaBorekMatik Script -->
