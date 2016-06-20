@@ -86,6 +86,47 @@ var BaklavaBorekMatik = {
         if (jQuery("#order-form-wrapper").length) {
             this.prepareOrderFormItems();
         }
+
+        if (jQuery("#dashboard-calendar").length) {
+            var calendar = jQuery('#dashboard-calendar').fullCalendar({
+                lang: 'tr',
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay'
+                },
+                eventClick: function(calEvent, jsEvent, view) {
+                    jQuery('#dashboard-calendar-edit').click();
+                    jQuery('#dashboard-calendar-detail-name-surname').html(calEvent.title);
+                    jQuery('#dashboard-calendar-detail-items').html(calEvent.items.join("<br>"));
+                    calendar.fullCalendar('unselect');
+                },
+                editable: true,
+                events: function(start, end, timezone, callback) {
+                    $.ajax({
+                        url: 'getCalendarEvents',
+                        dataType: 'json',
+                        data: {
+                            start: start.unix(),
+                            end: end.unix()
+                        },
+                        success: function(response) {
+                            if (!!response.result && response.result.length) {
+                                var events = [];
+                                jQuery.each(response.result, function(i, el) {
+                                    events.push({
+                                        title: el.nameSurname,
+                                        start: el.date,
+                                        items: el.item
+                                    });
+                                });
+                                callback(events);
+                            }
+                        }
+                    });
+                }
+            });
+        }
     }
 };
 

@@ -1,1 +1,44 @@
-Hello World!
+{% extends "BaklavaBorekBundle::layout.html.twig" %}
+
+{% block content %}
+    <div id="dashboard">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>{{ "Who - When - What?" |trans }}</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <div id='dashboard-calendar'></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="DashboardCalenderModalEdit" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">{{ "BaklavaBorek Order Info" | trans }}</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div id="dashboard-modal-wrapper" style="padding: 5px 20px;">
+                            <div class="dashboard-calendar-detail-wrapper">
+                                <div class="dashboard-calendar-detail-title">{{ "Name Surname" | trans }}:</div>
+                                <div id="dashboard-calendar-detail-name-surname"></div>
+                            </div>
+                            <div class="dashboard-calendar-detail-wrapper">
+                                <div class="dashboard-calendar-detail-title">{{ "Items" | trans }}:</div>
+                                <div id="dashboard-calendar-detail-items"></div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="modal-footer"></div>
+                </div>
+            </div>
+        </div>
+        <div id="dashboard-calendar-edit" data-toggle="modal" data-target="#DashboardCalenderModalEdit"></div>
+    </div>
+{% endblock %}
