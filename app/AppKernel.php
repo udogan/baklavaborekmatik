@@ -18,6 +18,7 @@ class AppKernel extends Kernel
             new BaklavaBorekBundle\BaklavaBorekBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
+            new \Circle\RestClientBundle\CircleRestClientBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {

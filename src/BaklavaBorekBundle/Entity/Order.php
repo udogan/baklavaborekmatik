@@ -29,8 +29,7 @@ class Order extends CreatedUpdatedDeletedAt
     /**
      * @var int
      *
-     * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @ORM\Column(type="integer")
      */
     private $userId;
 

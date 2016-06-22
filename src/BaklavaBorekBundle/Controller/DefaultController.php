@@ -38,10 +38,17 @@ class DefaultController extends Controller
           ->setParameter("end", date('Y-m-d 00:00:00', $endDate));
         $result = $query->getQuery()->execute();
 
+        $userService = $this->container->get("baklavaborek.service.user");
+        $users = $userService->getAllUsers();
+        $userNameSurname = array();
+        foreach ($users as $u) {
+            $userNameSurname[$u->id] = $u->name . " " . $u->surname;
+        }
+
         $returnResult = array();
         foreach ($result as $r) {
             $returnItem = array(
-              "nameSurname" => $r->getUserId()->__toString(),
+              "nameSurname" => $userNameSurname[$r->getUserId()] ?: "",
               "date" => $r->getWillPurchaseDate()->format("Y-m-d"),
               "item" => array()
             );

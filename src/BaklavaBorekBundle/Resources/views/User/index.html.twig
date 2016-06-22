@@ -21,8 +21,8 @@
                     <td>{{ user.name }}</td>
                     <td>{{ user.surname }}</td>
                     <td>{{ user.email }}</td>
-                    <td>{{ user.created|date('Y-m-d') }}</td>
-                    <td>{{ user.updated|date('Y-m-d') }}</td>
+                    <td>{{ (user.created / 1000)|date('Y-m-d') }}</td>
+                    <td>{{ (user.updated / 1000)|date('Y-m-d') }}</td>
                     <td>
                         <a href="{{ path('BaklavaBorekBundle_User_edit', {'userId': user.id}) }}"><button type="button" class="btn btn-primary">{{ "Edit" | trans }}</button></a>
                         <a href="{{ path('BaklavaBorekBundle_User_delete', {'userId': user.id}) }}"><button type="button" class="btn btn-danger">{{ "Delete" | trans }}</button></a>

@@ -2,17 +2,31 @@
 
 namespace BaklavaBorekBundle\Form;
 
+use BaklavaBorekBundle\Service\UserService;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class OrderType extends AbstractType
 {
+    private $userService;
+
+    public function __construct(UserService $userService) {
+        $this->userService = $userService;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $users = array();
+        foreach ($this->userService->getAllUsers() as $u) {
+            $users[$u->id] = $u->name . " " . $u->surname;
+        }
+
+        $mailDetailType = new MailDetailType($this->userService);
+
         $builder
-          ->add("userId", 'entity', array(
-              "class" => 'BaklavaBorekBundle:User',
+          ->add("userId", 'choice', array(
+              "choices" => $users,
               "label" => false
           ))
           ->add("item", 'collection', array(
@@ -31,8 +45,7 @@ class OrderType extends AbstractType
               "label" => false,
               "required" => false
           ))
-          ->add("mailDetail", 'BaklavaBorekBundle\Form\MailDetailType', array(
-              'data_class' => 'BaklavaBorekBundle\Entity\MailDetail',
+          ->add("mailDetail", $mailDetailType, array(
               "label" => false
           ));
     }

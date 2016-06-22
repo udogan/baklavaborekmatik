@@ -69,6 +69,15 @@ services:
             - { name: doctrine.event_subscriber, connection: default }
         calls:
             - [ setAnnotationReader, [ @annotation_reader ] ]
+    baklavaborek.service.user:
+        class: BaklavaBorekBundle\Service\UserService
+        arguments: ['@circle.restclient', 'http://localhost:8080/user']
+    baklavaborek.form.type.maildetail:
+        class: BaklavaBorekBundle\Form\MailDetailType
+        arguments: ['@baklavaborek.service.user']
+    baklavaborek.form.type.oder:
+        class: BaklavaBorekBundle\Form\OrderType
+        arguments: ['@baklavaborek.service.user']
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -83,3 +92,10 @@ assetic:
     use_controller: '%kernel.debug%'
     filters:
         cssrewrite: ~
+
+circle_rest_client:
+    curl:
+      defaults:
+        CURLOPT_HTTPHEADER:     [ 'Content-Type: application/json' ]
+        CURLOPT_FOLLOWLOCATION: true
+        CURLOPT_USERPWD: "user:0f91d871-68d8-4a82-ac34-30e965e4eeed"

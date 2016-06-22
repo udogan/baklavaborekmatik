@@ -238,6 +238,13 @@ class ComposerStaticInit854c4c729554a13481ff07c7e0c47904
                 0 => __DIR__ . '/..' . '/doctrine/common/lib',
             ),
         ),
+        'C' => 
+        array (
+            'Circle\\RestClientBundle' => 
+            array (
+                0 => __DIR__ . '/..' . '/ci/restclientbundle',
+            ),
+        ),
         'B' => 
         array (
             'Behat\\Transliterator' => 

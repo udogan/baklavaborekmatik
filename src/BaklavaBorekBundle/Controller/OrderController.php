@@ -39,7 +39,7 @@ class OrderController extends Controller
     {
         $translator = $this->get('translator');
         $order = new Order();
-        $form = $this->createForm('BaklavaBorekBundle\Form\OrderType', $order);
+        $form = $this->createForm($this->container->get("baklavaborek.form.type.oder"), $order);
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
@@ -79,7 +79,7 @@ class OrderController extends Controller
             $originalItems->add($item);
         }
 
-        $form = $this->createForm('BaklavaBorekBundle\Form\OrderType', $order);
+        $form = $this->createForm($this->container->get("baklavaborek.form.type.oder"), $order);
 
         $form->handleRequest($request);
         if ($form->isSubmitted()) {

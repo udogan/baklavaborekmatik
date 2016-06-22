@@ -36,8 +36,7 @@ class MailDetail extends CreatedUpdatedDeletedAt
     /**
      * @var int
      *
-     * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumn(name="mail_sent_by", referencedColumnName="id")
+     * @ORM\Column(type="integer")
      */
     private $mailSentBy;
 

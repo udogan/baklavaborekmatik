@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "fe3725f1d845c12b3ad40505e6271b50",
-    "content-hash": "704dcf4da5640d6a87cf21176194cc5d",
+    "hash": "58a39376e1be064f5ba5ca8b7a27d52b",
+    "content-hash": "0dd9ec3f055b7929ff514b7a0a020a58",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -46,6 +46,55 @@
                 "transliterator"
             ],
             "time": "2015-09-28 16:26:35"
+        },
+        {
+            "name": "ci/restclientbundle",
+            "version": "2.0.0",
+            "target-dir": "Circle/RestClientBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/CircleOfNice/CiRestClientBundle.git",
+                "reference": "6e503d243cf5a563e2c6e0d449a48e067a29bd5d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/CircleOfNice/CiRestClientBundle/zipball/6e503d243cf5a563e2c6e0d449a48e067a29bd5d",
+                "reference": "6e503d243cf5a563e2c6e0d449a48e067a29bd5d",
+                "shasum": ""
+            },
+            "require-dev": {
+                "php": ">=5.4",
+                "symfony/config": ">=2.1",
+                "symfony/dependency-injection": ">=2.1",
+                "symfony/http-kernel": ">=2.1",
+                "symfony/yaml": ">=2.1"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Circle\\RestClientBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL"
+            ],
+            "authors": [
+                {
+                    "name": "Circle.ai",
+                    "email": "info@circle.ai"
+                }
+            ],
+            "description": "Provides REST request methods. Mapper bundle for php internal curl library",
+            "keywords": [
+                "REST client curl POST GET PUT DELETE OPTIONS CONNECT PATCH TRACE HEAD content-type payload library plugin"
+            ],
+            "time": "2016-05-23 08:54:19"
         },
         {
             "name": "doctrine/annotations",

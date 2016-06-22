@@ -21,9 +21,8 @@ class UserController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
-        $repository = $em->getRepository("BaklavaBorekBundle:User");
-        $users = $repository->findAll();
+        $userService = $this->container->get("baklavaborek.service.user");
+        $users = $userService->getAllUsers();
         return $this->render('BaklavaBorekBundle:User:index.html.twig', array(
             "users" => $users
         ));
@@ -34,14 +33,13 @@ class UserController extends Controller
      */
     public function createAction(Request $request)
     {
-        $user = new User();
-        $form = $this->createForm('BaklavaBorekBundle\Form\UserType', $user);
+        $userService = $this->container->get("baklavaborek.service.user");
+
+        $form = $this->createForm('BaklavaBorekBundle\Form\UserType');
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($user);
-            $em->flush();
+            $userService->createUser((Object) $form->getData());
             return $this->redirect($this->generateUrl("BaklavaBorekBundle_User_index"));
         }
 
@@ -56,9 +54,8 @@ class UserController extends Controller
     public function editAction(Request $request, $userId)
     {
         $translator = $this->get('translator');
-        $em = $this->getDoctrine()->getManager();
-        $repository = $em->getRepository("BaklavaBorekBundle:User");
-        $user = $repository->findOneBy(array("id" => $userId));
+        $userService = $this->container->get("baklavaborek.service.user");
+        $user = $userService->getUser($userId);
 
         if (!$user) {
             throw $this->createNotFoundException($translator->trans("User Not Found With Id %id%", array("%id%" => $userId)));
@@ -68,9 +65,7 @@ class UserController extends Controller
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($user);
-            $em->flush();
+            $userService->editUser($user);
             return $this->redirect($this->generateUrl("BaklavaBorekBundle_User_index"));
         }
 
@@ -85,9 +80,8 @@ class UserController extends Controller
     public function deleteAction(Request $request, $userId)
     {
         $translator = $this->get('translator');
-        $em = $this->getDoctrine()->getManager();
-        $repository = $em->getRepository("BaklavaBorekBundle:User");
-        $user = $repository->findOneBy(array("id" => $userId));
+        $userService = $this->container->get("baklavaborek.service.user");
+        $user = $userService->getUser($userId);
 
         if (!$user) {
             throw $this->createNotFoundException($translator->trans("User Not Found With Id %id%", array("%id%" => $userId)));
@@ -99,9 +93,7 @@ class UserController extends Controller
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($user);
-            $em->flush();
+            $userService->deleteUser($userId);
             return $this->redirect($this->generateUrl("BaklavaBorekBundle_User_index"));
         }
 
