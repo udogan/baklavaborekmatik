@@ -89,4 +89,4 @@ circle_rest_client:
       defaults:
         CURLOPT_HTTPHEADER:     [ 'Content-Type: application/json' ]
         CURLOPT_FOLLOWLOCATION: true
-        CURLOPT_USERPWD: "user:6e8e7c2a-35f7-42c8-914d-38df9698e505"
+        CURLOPT_USERPWD: "user:f97457b7-89c1-4610-b045-c76113741944"
