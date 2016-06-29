@@ -38,7 +38,7 @@ class Product extends CreatedUpdatedDeletedAt
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
