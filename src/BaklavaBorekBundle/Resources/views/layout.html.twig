@@ -36,7 +36,7 @@
                 <div class="col-md-3 left_col">
                     <div class="left_col scroll-view">
                         <div class="navbar nav_title" style="border: 0;">
-                            <a href="/" class="site_title"><i class="fa fa-thumbs-o-up"></i> <span>Baklava Börek!</span></a>
+                            <a href="/app_dev.php" class="site_title"><i class="fa fa-thumbs-o-up"></i> <span>Baklava Börek!</span></a>
                         </div>
                         <div class="clearfix"></div>
                         <br/>
@@ -45,10 +45,12 @@
                             <div class="menu_section">
                                 <h3>General</h3>
                                 <ul class="nav side-menu">
-                                    <li><a href="/"><i class="fa fa-desktop"></i> {{ "Dashboard" | trans }}</a></li>
+                                    <li><a href="/app_dev.php"><i class="fa fa-desktop"></i> {{ "Dashboard" | trans }}</a></li>
                                     <li><a href="{{ path('BaklavaBorekBundle_User_index') }}"><i class="fa fa-user"></i> {{ "User" | trans }}</a></li>
                                     <li><a href="{{ path('BaklavaBorekBundle_Order_index') }}"><i class="fa fa-cutlery"></i> {{ "Order" | trans }}</a></li>
                                     <li><a><i class="fa fa-bar-chart-o"></i> {{ "Report" | trans }}</a></li>
+                                    <li><a href="{{ path('BaklavaBorekBundle_Product_index') }}"><i class="fa fa-bar-chart-o"></i> {{ "Product" | trans }}</a></li>
+                                    <li><a href="{{ path('BaklavaBorekBundle_Measurement_index') }}"><i class="fa fa-bar-chart-o"></i> {{ "Measurement" | trans }}</a></li>
                                 </ul>
                             </div>
                         </div>

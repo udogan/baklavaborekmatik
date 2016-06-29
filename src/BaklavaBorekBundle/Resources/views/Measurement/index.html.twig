@@ -1,0 +1,27 @@
+{% extends "BaklavaBorekBundle::layout.html.twig" %}
+
+{% block content %}
+    <a class="index-create-user" href="{{ path('BaklavaBorekBundle_Measurement_create') }}"><button type="button" class="btn btn-success">{{ "Create Measurement" | trans }}</button></a>
+
+    <table class="user-data-table table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>{{ "Name" | trans }}</th>
+                <th>{{ "Operations" | trans }}</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for measurement in measurements %}
+                <tr>
+                    <td>{{ measurement.name }}</td>
+
+                    <td>
+                        <a href="{{ path('BaklavaBorekBundle_Measurement_edit', {'userId': measurement.id}) }}"><button type="button" class="btn btn-primary">{{ "Edit" | trans }}</button></a>
+                        <a href="{{ path('BaklavaBorekBundle_Measurement_delete', {'userId': measurement.id}) }}"><button type="button" class="btn btn-danger">{{ "Delete" | trans }}</button></a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
