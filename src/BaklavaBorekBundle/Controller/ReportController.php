@@ -44,19 +44,6 @@ class ReportController extends Controller
 
 
 
-        $query3 = $repository3->createQueryBuilder('p')
-            ->where('p.mailSentBy = :a11')
-            ->set('p.mailSentBy ')
-            ->setMaxResults(5)
-            ->getQuery();
-
-        $a3 = $query3->getResult();
-
-
-
-
-
-
         return $this->render('BaklavaBorekBundle:Report:index.html.twig', array(
             "users" => $a1,
             "users2" => $a2
