@@ -12,4 +12,13 @@ use Doctrine\ORM\EntityRepository;
  */
 class ItemRepository extends EntityRepository
 {
+    public function getPie(){
+        return $this->createQueryBuilder("pie")
+            ->select(array("pie", "pr.name"))
+            ->innerJoin('BaklavaBorekBundle\Entity\Product', 'pr', 'WITH', 'pr.id = pie.product')
+            ->addSelect("COUNT(pie.product) as piece")
+            ->groupBy("pie.product")
+            ->getQuery()
+            ->getResult();
+    }
 }
