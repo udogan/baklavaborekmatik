@@ -2,7 +2,7 @@
 
 namespace BaklavaBorekBundle\Controller;
 
-use BaklavaBorekBundle\Entity\Product;
+use BaklavaBorekBundle\Entity\Measurement;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -81,13 +81,13 @@ class MeasurementController extends Controller
     }
 
     /**
-     * @Route("/delete/{productId}", name="BaklavaBorekBundle_Measurement_delete")
+     * @Route("/delete/{measurementId}", name="BaklavaBorekBundle_Measurement_delete")
      */
     public function deleteAction(Request $request, $measurementId)
     {
         $translator = $this->get('translator');
         $em = $this->getDoctrine()->getManager();
-        $repository = $em->getRepository("BaklavaBorekBundle:Product");
+        $repository = $em->getRepository("BaklavaBorekBundle:Measurement");
         $measurement = $repository->findOneBy(array("id" => $measurementId));
 
         if (!$measurement) {

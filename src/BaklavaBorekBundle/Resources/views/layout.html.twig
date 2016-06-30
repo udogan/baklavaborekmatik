@@ -48,7 +48,7 @@
                                     <li><a href="/app_dev.php"><i class="fa fa-desktop"></i> {{ "Dashboard" | trans }}</a></li>
                                     <li><a href="{{ path('BaklavaBorekBundle_User_index') }}"><i class="fa fa-user"></i> {{ "User" | trans }}</a></li>
                                     <li><a href="{{ path('BaklavaBorekBundle_Order_index') }}"><i class="fa fa-cutlery"></i> {{ "Order" | trans }}</a></li>
-                                    <li><a><i class="fa fa-bar-chart-o"></i> {{ "Report" | trans }}</a></li>
+                                    <li><a href="{{ path('BaklavaBorekBundle_Report_index') }}"><i class="fa fa-bar-chart-o"></i> {{ "Report" | trans }}</a></li>
                                     <li><a href="{{ path('BaklavaBorekBundle_Product_index') }}"><i class="fa fa-bar-chart-o"></i> {{ "Product" | trans }}</a></li>
                                     <li><a href="{{ path('BaklavaBorekBundle_Measurement_index') }}"><i class="fa fa-bar-chart-o"></i> {{ "Measurement" | trans }}</a></li>
                                 </ul>
@@ -109,6 +109,10 @@
         <script src="{{ asset('bundles/baklavaborek/vendors/jquery/dist/jquery.min.js') }}"></script>
         <!-- Bootstrap -->
         <script src="{{ asset('bundles/baklavaborek/vendors/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+
+
+        <script src="{{ asset('bundles/baklavaborek/vendors/echarts/dist/echarts.min.js') }}"></script>
+
         <!-- FastClick -->
         <script src="{{ asset('bundles/baklavaborek/vendors/fastclick/lib/fastclick.js') }}"></script>
         <!-- NProgress -->
