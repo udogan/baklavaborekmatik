@@ -1,9 +1,9 @@
 {% extends "BaklavaBorekBundle::layout.html.twig" %}
 
 {% block content %}
-    <a class="index-create-order" href="{{ path('BaklavaBorekBundle_Product_create') }}"><button type="button" class="btn btn-success">{{ "Create Product" | trans }}</button></a>
+    <a class="index-create-product" href="{{ path('BaklavaBorekBundle_Product_create') }}"><button type="button" class="btn btn-success">{{ "Create Product" | trans }}</button></a>
 
-    <table class="order-data-table table table-striped table-bordered">
+    <table class="product-data-table table table-striped table-bordered">
         <thead>
         <tr>
             <th>{{ "ID" | trans }}</th>

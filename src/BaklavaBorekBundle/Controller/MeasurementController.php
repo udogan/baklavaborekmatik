@@ -94,7 +94,7 @@ class MeasurementController extends Controller
         $measurement = $repository->findOneBy(array("id" => $measurementId));
 
         if (!$measurement) {
-            throw $this->createNotFoundException($translator->trans("Are you sure want to Measurement delete <i>%name%</i> ?", array("%name%" => $measurement.name)));
+            throw $this->createNotFoundException($translator->trans("Are you sure want to delete Measurement <i>%name%</i> ?", array("%name%" => $measurement.name)));
         }
 
         $form = $this->createFormBuilder(array('measurementID' => $measurementId))
