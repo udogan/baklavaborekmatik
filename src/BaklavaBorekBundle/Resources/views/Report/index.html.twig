@@ -15,14 +15,14 @@
             <div class="alert alert-info alert-dismissible fade in" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
                 </button>
-                <strong>Yalancıların geciktirdiği gün sayısı: </strong> {{ avarage }}~
+                <strong>{{ "The number of days of delay Liar" | trans }}: </strong> {{ avarage }}~
             </div>
         </div>
 
         <div class="col-md-6 col-sm-6 col-xs-12">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>{{ "En Yalancı Kim" | trans }}</h2>
+                    <h2>{{ "Most Liar Who" | trans }}</h2>
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
@@ -31,9 +31,9 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>İsim</th>
-                            <th>Yalan Sayısı</th>
-                            <th>Doğru Sayısı</th>
+                            <th>{{ "Name" | trans }}</th>
+                            <th>{{ "Total Lie" | trans }}</th>
+                            <th>{{ "Total Correct" | trans }}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -56,7 +56,7 @@
         <div class="col-md-6 col-sm-6 col-xs-12">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>{{ "En Çok Avlananlar" | trans }}</h2>
+                    <h2>{{ "Most Who Hunted" | trans }}</h2>
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
@@ -65,8 +65,8 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>İsim</th>
-                            <th>Aldığı Ceza</th>
+                            <th>{{ "Name" | trans }}</th>
+                            <th>{{ "Received Penalty" | trans }}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -74,7 +74,7 @@
                             <tr>
                                 <th scope="row">1</th>
                                 <td>{{ hunted.name }} {{ hunted.surname }}</td>
-                                <td>{{ hunted.kac_tane }}</td>
+                                <td>{{ hunted.piece }}</td>
                             </tr>
                         {% endfor %}
                         </tbody>
@@ -89,7 +89,7 @@
         <div class="col-md-6 col-sm-6 col-xs-12">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>{{ "En çok Avlayanlar" | trans }}</h2>
+                    <h2>{{ "Most Who Catch" | trans }}</h2>
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
@@ -97,8 +97,8 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>İsim</th>
-                            <th>Kaç Kere Avladı</th>
+                            <th>{{ "Name" | trans }}</th>
+                            <th>{{ "How Many Times Did Hunt" | trans }}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -106,7 +106,7 @@
                             <tr>
                                 <td>{{ hunter.id }}</td>
                                 <td>{{ hunter.name }} {{ hunter.surname }}</td>
-                                <td>{{ hunter.kac_tane }}</td>
+                                <td>{{ hunter.piece }}</td>
                             </tr>
                         {% endfor %}
                         </tbody>
@@ -120,7 +120,7 @@
         <div class="col-md-6 col-sm-6 col-xs-12">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>{{ "En Sözünde Duran Kişi" | trans }}</h2>
+                    <h2>{{ "The Plant in Most People" | trans }}</h2>
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
@@ -129,8 +129,8 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>İsim</th>
-                            <th>Kaç Kere Avlanmış</th>
+                            <th>{{ "Name" | trans }}</th>
+                            <th>{{ "How Many Times Have Hunted" | trans }}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -138,7 +138,7 @@
                             <tr>
                                 <td>{{ honest.id }}</td>
                                 <td>{{ honest.name }} {{ honest.surname }}</td>
-                                <td>{{ honest.kac_tane }}</td>
+                                <td>{{ honest.piece }}</td>
                             </tr>
                         {% endfor %}
                         </tbody>
@@ -151,7 +151,7 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>En Çok Aldırılanlar</h2>
+                    <h2>{{ "Most ignored those" | trans }}</h2>
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
@@ -419,7 +419,7 @@
                 data: [
                     {% for p in pie %}
                         {
-                            value: {{ p.kac_tane }},
+                            value: {{ p.piece }},
                             name:  '{{ p.name }}'
                         },
                     {% endfor %}

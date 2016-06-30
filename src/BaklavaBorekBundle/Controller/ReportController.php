@@ -20,22 +20,22 @@ class ReportController extends Controller{
     public function indexAction(Request $request){
         $em = $this->getDoctrine()->getManager();
 
-        /* Yalancıların ortalama günleri */
-        $gun   = 0;
-        $avarage = $em->getRepository('BaklavaBorekBundle:Order')->get_Avarage();
+        /* Liars Avarage */
+        $day = 0;
+        $avarage = $em->getRepository('BaklavaBorekBundle:Order')->getAvarage();
         if(count($avarage) > 0){
             for($i=0; $i<count($avarage); $i++){
                 $aT = $avarage[$i]->getPurchaseDate()->getTimestamp();
                 $tT = $avarage[$i]->getWillPurchaseDate()->getTimestamp();
                 $oT = ($aT-$tT);
-                $gun = ($oT/(60*60*24));
+                $day = ($oT/(60*60*24));
             }
-            $avarage = $gun / count($avarage);
+            $avarage = $day / count($avarage);
         }
 
 
-        /* En Yalancı */
-        $liars = $em->getRepository('BaklavaBorekBundle:Order')->get_liars();
+        /* The Liar */
+        $liars = $em->getRepository('BaklavaBorekBundle:Order')->getLiars();
         $liars_array = array();
         $liars_m = array("users" => array());
         for($i=0; $i<count($liars); $i++){
@@ -49,17 +49,17 @@ class ReportController extends Controller{
         }
         
 
-        /* En Çok Avlananlar */
-        $hunted = $em->getRepository('BaklavaBorekBundle:Order')->get_hunted();
+        /* Most Who Hunted */
+        $hunted = $em->getRepository('BaklavaBorekBundle:Order')->getHunted();
 
-        /* En Çok Avlayanlar */
-        $hunter = $em->getRepository('BaklavaBorekBundle:MailDetail')->get_hunter();
+        /* Most Who Catch */
+        $hunter = $em->getRepository('BaklavaBorekBundle:MailDetail')->getHunter();
 
-        /* En Sözünde Duran Kişi */
-        $honest = $em->getRepository('BaklavaBorekBundle:Order')->get_Honest();
+        /* The Plant in Most People */
+        $honest = $em->getRepository('BaklavaBorekBundle:Order')->getHonest();
 
-        /* Pie */
-        $pie = $em->getRepository('BaklavaBorekBundle:Item')->get_Pie();
+        /* Pie Graph Avarage */
+        $pie = $em->getRepository('BaklavaBorekBundle:Item')->getPie();
 
         return $this->render('BaklavaBorekBundle:Report:index.html.twig', array(
             "avarage"     => $avarage,
@@ -67,8 +67,7 @@ class ReportController extends Controller{
             "hunted_list" => $hunted,
             "hunter_list" => $hunter,
             "honest_list" => $honest,
-            "pie"         => $pie,
-            "test" => $liars
+            "pie"         => $pie
         ));
     }
 }

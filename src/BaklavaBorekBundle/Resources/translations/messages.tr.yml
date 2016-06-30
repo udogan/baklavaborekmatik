@@ -49,3 +49,16 @@
 "Edit Measurement": "Ölçü Birimi Düzenle"
 "Delete Measurement": "Ölçü Birimi Sil"
 "Are you sure want to delete Measurement <i>%name%</i> ?": "<i>%name%</i> adlı birimi silmek istediğinize emin misiniz?"
+
+"Total Lie": "Yalan Sayısı"
+"Total Correct": "Doğru Sayısı"
+"Received Penalty": "Aldığı Ceza"
+"How Many Times Did Hunt": "Aldığı Ceza"
+"How Many Times Have Hunted": "Kaç Kere Avlanmış"
+
+"The number of days of delay Liar": "Yalancıların geciktirdiği gün sayısı"
+"Most Liar Who": "En Yalancı Kim"
+"Most Who Hunted": "En Çok Avlananlar"
+"Most Who Catch": "En Çok Avlayanlar"
+"The Plant in Most People": "En Sözünde Duran Kişiler"
+"Most ignored those": "En Çok Aldırılanlar"

@@ -12,7 +12,7 @@ use Doctrine\ORM\EntityRepository;
  */
 class OrderRepository extends EntityRepository
 {
-    public function get_liars(){
+    public function getLiars(){
         return $this->createQueryBuilder("liars")
             ->select(array("liars"))
             ->andwhere("liars.purchaseDate is null")
@@ -31,31 +31,29 @@ class OrderRepository extends EntityRepository
             ->getSingleScalarResult();
     }
 
-    public function get_Hunted(){
+    public function getHunted(){
         return $this->createQueryBuilder("hunted")
             ->select(array("hunted", "u.name", "u.surname"))
-            ->innerJoin("BaklavaBorekBundle\Entity\user", "u")
-            ->addSelect("COUNT(hunted.userId) as kac_tane")
-            ->where("u.id = hunted.userId")
+            ->innerJoin('BaklavaBorekBundle\Entity\user', 'u', 'WITH', 'u.id = hunted.userId')
+            ->addSelect("COUNT(hunted.userId) as piece")
             ->groupBy("hunted.userId")
-            ->orderBy("kac_tane", "DESC")
+            ->orderBy("piece", "DESC")
             ->getQuery()
             ->getResult();
     }
 
-    public function get_Honest(){
+    public function getHonest(){
         return $this->createQueryBuilder("honest")
             ->select(array("honest", "u.id", "u.name", "u.surname"))
-            ->innerJoin("BaklavaBorekBundle\Entity\user", "u")
-            ->addSelect("COUNT(honest.userId) as kac_tane")
-            ->where("u.id = honest.userId")
+            ->innerJoin('BaklavaBorekBundle\Entity\user', 'u', 'WITH', 'u.id = honest.userId')
+            ->addSelect("COUNT(honest.userId) as piece")
             ->andwhere("honest.purchaseDate is not null")
             ->andwhere("honest.purchaseDate <= honest.willPurchaseDate")
             ->groupBy("honest.userId")
             ->getQuery()->getResult();
     }
 
-    public function get_Avarage(){
+    public function getAvarage(){
         return $this->createQueryBuilder("avarage")
             ->select(array("avarage"))
             ->where("avarage.purchaseDate > avarage.willPurchaseDate")
