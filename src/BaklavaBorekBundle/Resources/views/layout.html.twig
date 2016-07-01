@@ -48,8 +48,8 @@
                                     <li><a href="/"><i class="fa fa-desktop"></i> {{ "Dashboard" | trans }}</a></li>
                                     <li><a href="{{ path('BaklavaBorekBundle_User_index') }}"><i class="fa fa-user"></i> {{ "User" | trans }}</a></li>
                                     <li><a href="{{ path('BaklavaBorekBundle_Order_index') }}"><i class="fa fa-cutlery"></i> {{ "Order" | trans }}</a></li>
-                                    <li><a href="{{ path('BaklavaBorekBundle_Product_index') }}"><i class="fa fa-cutlery"></i> {{ "Product" | trans }}</a></li>
-                                    <li><a href="{{ path('BaklavaBorekBundle_Measurement_index') }}"><i class="fa fa-cutlery"></i> {{ "Measurement" | trans }}</a></li>
+                                    <li><a href="{{ path('BaklavaBorekBundle_Product_index') }}"><i class="fa fa-product-hunt"></i> {{ "Product" | trans }}</a></li>
+                                    <li><a href="{{ path('BaklavaBorekBundle_Measurement_index') }}"><i class="fa fa-balance-scale"></i> {{ "Measurement" | trans }}</a></li>
                                     <li><a href="{{ path('BaklavaBorekBundle_Report_index') }}"><i class="fa fa-bar-chart-o"></i> {{ "Report" | trans }}</a></li>
                                 </ul>
                             </div>
@@ -127,6 +127,7 @@
         <!-- FullCalendar -->
         <script src="{{ asset('bundles/baklavaborek/vendors/moment/min/moment.min.js') }}"></script>
         <script src="{{ asset('bundles/baklavaborek/vendors/fullcalendar/dist/fullcalendar.min.js') }}"></script>
+        <script src="{{ asset('bundles/baklavaborek/vendors/echarts/dist/echarts.min.js') }}"></script>
         <script src="{{ asset('bundles/baklavaborek/vendors/fullcalendar/dist/lang/tr.js') }}"></script>
         <!-- Custom Theme Scripts -->
         <script src="{{ asset('bundles/baklavaborek/build/js/custom.min.js') }}"></script>

@@ -83,6 +83,12 @@ var BaklavaBorekMatik = {
         var orderDataTable = jQuery.extend(this.defaultDataTableOptions(), {"order": [3, "desc"]});
         jQuery(".order-data-table").dataTable(orderDataTable);
 
+        var productDataTable = jQuery.extend(this.defaultDataTableOptions(), {"order": [3, "desc"]});
+        jQuery(".product-data-table").dataTable(productDataTable);
+
+        var measurementDataTable = jQuery.extend(this.defaultDataTableOptions(), {"order": [3, "desc"]});
+        jQuery(".measurement-data-table").dataTable(measurementDataTable);
+
         if (jQuery("#order-form-wrapper").length) {
             this.prepareOrderFormItems();
         }

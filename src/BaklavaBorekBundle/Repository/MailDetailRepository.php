@@ -12,4 +12,15 @@ use Doctrine\ORM\EntityRepository;
  */
 class MailDetailRepository extends EntityRepository
 {
+    public function getHunter(){
+        return $this->createQueryBuilder("mail_t")
+            ->select(array("mail_t","user_t.name","user_t.surname"))
+            ->innerJoin("BaklavaBorekBundle\Entity\user", "user_t")
+            ->addSelect("COUNT(mail_t.mailSentBy) as avlama_sayisi")
+            ->where("user_t.id = mail_t.mailSentBy")
+            ->groupBy("mail_t.mailSentBy")
+            ->orderBy("avlama_sayisi", "DESC")
+            ->getQuery()
+            ->getResult();
+    }
 }

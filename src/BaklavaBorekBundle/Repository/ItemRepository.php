@@ -12,4 +12,15 @@ use Doctrine\ORM\EntityRepository;
  */
 class ItemRepository extends EntityRepository
 {
+    public function getFavoriteProduct(){
+        return $this->createQueryBuilder("item_t")
+            ->select(array("product_t.name"))
+            ->innerJoin("BaklavaBorekBundle\Entity\product", "product_t")
+            ->addSelect("COUNT(item_t.id) as siparis_sayisi")
+            ->where("item_t.product = product_t.id")
+            ->groupBy("item_t.product")
+            ->orderBy("siparis_sayisi", "DESC")
+            ->getQuery()
+            ->getResult();
+    }
 }

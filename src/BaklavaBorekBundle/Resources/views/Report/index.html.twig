@@ -1,5 +1,189 @@
 {% extends "BaklavaBorekBundle::layout.html.twig" %}
 
 {% block content %}
-   Rapor
+   <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+         <div class="alert alert-success alert-dismissible fade in" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+            </button>
+            <strong>Yalancıların</strong> almayı geçiktirdiği ortalama gün sayısı: {{ avarage }}
+         </div>
+       </div>
+   </div>
+   <div class="row">
+      <div class="col-md-6 col-sm-6 col-xs-12">
+         <div class="x_panel">
+            <div class="x_title">
+               <h2>En Yalancı İlk 5 Kim <small>Listesi</small></h2>
+               <ul class="nav navbar-right panel_toolbox">
+                  <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                  </li>
+                  <li><a class="close-link"><i class="fa fa-close"></i></a>
+                  </li>
+               </ul>
+               <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+
+               <table class="table">
+                  <thead>
+                  <tr>
+                     <th>Sıralama</th>
+                     <th>İsim</th>
+                     <th>Yalan Sayısı</th>
+                     <th>Doğru Sayısı</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  {%  set deger = 0 %}
+                  {% for liar in liars %}
+                     <tr>
+                        <th>{%  set deger = deger + 1 %}{{ deger }}</th>
+                        <td>{{ liar.name }} {{ liar.surname }}</td>
+                        <td>{{ liar.yalan_sayisi }}</td>
+                        <td>{{ liar.dogru_sayisi }}</td>
+                     </tr>
+                  {% endfor %}
+                  </tbody>
+               </table>
+
+            </div>
+         </div>
+      </div>
+      <div class="col-md-6 col-sm-6 col-xs-12">
+         <div class="x_panel">
+            <div class="x_title">
+               <h2>Avlanan<small>Listesi</small></h2>
+               <ul class="nav navbar-right panel_toolbox">
+                  <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                  </li>
+                  <li><a class="close-link"><i class="fa fa-close"></i></a>
+                  </li>
+               </ul>
+               <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+
+               <table class="table">
+                  <thead>
+                  <tr>
+                     <th>Sıralama</th>
+                     <th>İsim</th>
+                     <th>Avlanma Sayısı</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  {% set deger = 0 %}
+                  {% for hunted in hunteds %}
+                     <tr>
+                        <th scope="row">{%  set deger= deger + 1 %}{{ deger }}</th>
+                        <td>{{ hunted.name }} {{ hunted.surname }}</td>
+                        <td>{{ hunted.avlanma_sayisi }}</td>
+                     </tr>
+                  {% endfor %}
+                  </tbody>
+               </table>
+
+            </div>
+         </div>
+      </div>
+      <div class="col-md-6 col-sm-6 col-xs-12">
+         <div class="x_panel">
+            <div class="x_title">
+               <h2>Avlayan<small>Listesi</small></h2>
+               <ul class="nav navbar-right panel_toolbox">
+                  <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                  </li>
+                  <li><a class="close-link"><i class="fa fa-close"></i></a>
+                  </li>
+               </ul>
+               <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+
+               <table class="table">
+                  <thead>
+                  <tr>
+                     <th>Sıralama</th>
+                     <th>İsim</th>
+                     <th>Avlama Sayısı</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  {% set deger = 0 %}
+                  {% for hunter in hunters %}
+                     <tr>
+                        <th scope="row"> {%  set deger= deger + 1 %}{{ deger }} </th>
+                        <td>{{ hunter.name }} {{ hunter.surname }} </td>
+                        <td>{{ hunter.avlama_sayisi }}</td>
+                     </tr>
+                  {% endfor %}
+                  </tbody>
+               </table>
+
+            </div>
+         </div>
+      </div>
+      <div class="col-md-6 col-sm-6 col-xs-12">
+         <div class="x_panel">
+            <div class="x_title">
+               <h2>En Sözünde Duran Kişiler<small>Listesi</small></h2>
+               <ul class="nav navbar-right panel_toolbox">
+                  <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                  </li>
+                  <li><a class="close-link"><i class="fa fa-close"></i></a>
+                  </li>
+               </ul>
+               <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+
+               <table class="table">
+                  <thead>
+                  <tr>
+                     <th>Sıralama</th>
+                     <th>İsim</th>
+                     <th>Sözünde Durma Sayısı</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  {% set deger = 0 %}
+                  {% for keep in keeps %}
+                     <tr>
+                        <th scope="row">{%  set deger= deger + 1 %}{{ deger }}</th>
+                        <td>{{ keep.name }} {{ keep.surname }}</td>
+                        <td>{{ keep.soz_sayisi }}</td>
+                     </tr>
+                  {% endfor %}
+                  </tbody>
+               </table>
+
+            </div>
+         </div>
+      </div>
+      <div class="col-md-12 col-sm-12 col-xs-12">
+         <div class="x_panel">
+            <div class="x_title">
+               <h2>Pie Area</h2>
+               <ul class="nav navbar-right panel_toolbox">
+                  <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                  </li>
+                  <li><a class="close-link"><i class="fa fa-close"></i></a>
+                  </li>
+               </ul>
+               <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+
+               <div id="echart_pie2" style="height: 350px; -webkit-tap-highlight-color: transparent; -webkit-user-select: none; position: relative; background-color: transparent;" _echarts_instance_="ec_1467318848183" data-pie="{{ productfavorites|json_encode() }}">
+                  <div style="position: relative; overflow: hidden; width: 485px; height: 350px; cursor: default;">
+                     <canvas width="485" height="350" data-zr-dom-id="zr_0" style="position: absolute; left: 0px; top: 0px; width: 485px; height: 350px; -webkit-user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></canvas>
+                  </div>
+                  <div style="position: absolute; display: none; border: 0px solid rgb(51, 51, 51); white-space: nowrap; z-index: 9999999; transition: left 0.4s cubic-bezier(0.23, 1, 0.32, 1), top 0.4s cubic-bezier(0.23, 1, 0.32, 1); border-radius: 4px; color: rgb(255, 255, 255); font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 14px; font-family: Arial, Verdana, sans-serif; line-height: 21px; padding: 5px; left: 208.016px; top: 159px; background-color: rgba(0, 0, 0, 0.498039);">
+                     Area Mode <br>rose6 : 35 (31.82%)</div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
 {% endblock %}

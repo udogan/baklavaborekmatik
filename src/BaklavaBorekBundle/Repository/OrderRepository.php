@@ -3,6 +3,7 @@
 namespace BaklavaBorekBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\NoResultException;
 
 /**
  * OrderRepository
@@ -12,4 +13,76 @@ use Doctrine\ORM\EntityRepository;
  */
 class OrderRepository extends EntityRepository
 {
+    public function getLiarsDay(){
+        return $this->createQueryBuilder("o")
+            ->select(array("o.willPurchaseDate,o.purchaseDate"))
+            ->andwhere("o.purchaseDate is not null")
+            ->andwhere("o.willPurchaseDate < o.purchaseDate")
+            ->getQuery()
+            ->getResult();
+    }
+    public function getOrder_t(){
+        return $this->createQueryBuilder("order_t")
+            ->select(array("user_t.id","user_t.name","user_t.surname"))
+            ->innerJoin("BaklavaBorekBundle\Entity\user", "user_t")
+            ->where("user_t.id = order_t.userId")
+            ->groupBy("order_t.userId")
+            ->getQuery()
+            ->getResult();
+    }
+    public function getCurrents($user_id)
+    {
+        try {
+            return $this->createQueryBuilder("order_t")
+                ->select(array("COUNT(order_t.userId) as dogru_sayisi"))
+                ->andwhere("order_t.willPurchaseDate >= order_t.purchaseDate")
+                ->andwhere("order_t.userId = :user_id")
+                ->setParameter("user_id", $user_id)
+                ->getQuery()
+                ->getSingleScalarResult();
+        } catch (NoResultException $e) {
+            return 0;
+        }
+    }
+    public function getLiars($user_id)
+    {
+        try {
+            return $this->createQueryBuilder("order_t")
+                ->select(array("COUNT(order_t.userId) as yalan_sayisi"))
+                ->andwhere("order_t.purchaseDate is null")
+                ->andwhere("order_t.willPurchaseDate >= :willPurchaseDate")
+                ->andwhere("order_t.userId = :user_id")
+                ->groupBy("order_t.userId")
+                ->orderBy("yalan_sayisi", "DESC")
+                ->setParameter("willPurchaseDate", date("Y-m-d H:iconfused", time()))
+                ->setParameter("user_id", $user_id)
+                ->getQuery()
+                ->getSingleScalarResult();
+        }  catch(NoResultException $e) {
+            return 0;
+        }
+    }
+    public function getHunted(){
+        return $this->createQueryBuilder("order_t")
+            ->select(array("order_t","user_t.name","user_t.surname"))
+            ->innerJoin("BaklavaBorekBundle\Entity\user", "user_t")
+            ->addSelect("COUNT(order_t.userId) as avlanma_sayisi")
+            ->where("user_t.id = order_t.userId")
+            ->groupBy("order_t.userId")
+            ->orderBy("avlanma_sayisi", "DESC")
+            ->getQuery()
+            ->getResult();
+    }
+    public function getKeepPromise(){
+        return $this->createQueryBuilder("order_t")
+            ->select(array("user_t.name","user_t.surname"))
+            ->innerJoin("BaklavaBorekBundle\Entity\user", "user_t")
+            ->addSelect("COUNT(order_t.userId) as soz_sayisi")
+            ->andwhere("user_t.id = order_t.userId")
+            ->andwhere("order_t.willPurchaseDate >= order_t.purchaseDate")
+            ->groupBy("order_t.userId")
+            ->orderBy("soz_sayisi", "DESC")
+            ->getQuery()
+            ->getResult();
+    }
 }
