@@ -25,10 +25,7 @@ class ReportController extends Controller{
         $avarage = $em->getRepository('BaklavaBorekBundle:Order')->getAvarage();
         if(count($avarage) > 0){
             for($i=0; $i<count($avarage); $i++){
-                $aT = $avarage[$i]->getPurchaseDate()->getTimestamp();
-                $tT = $avarage[$i]->getWillPurchaseDate()->getTimestamp();
-                $oT = ($aT-$tT);
-                $day = ($oT/(60*60*24));
+                $day = (($avarage[$i]->getPurchaseDate()->getTimestamp()-$avarage[$i]->getWillPurchaseDate()->getTimestamp())/(60*60*24));
             }
             $avarage = $day / count($avarage);
         }
