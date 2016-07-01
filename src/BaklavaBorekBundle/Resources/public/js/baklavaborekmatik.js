@@ -133,7 +133,69 @@ var BaklavaBorekMatik = {
                 }
             });
         }
+
+        this.pieChart();
+    },
+    pieChart: function (){
+        try{
+            var json_data = JSON.parse(jQuery("#pieChart").attr("data-pie"));
+        }catch (err){
+            jQuery("#pieChart").hide();
+            return;
+        }
+
+        var nameHolder = [], valueHolder = [];
+        jQuery.map(json_data, function(el) {nameHolder.push(el.name); valueHolder.push(el.value);})
+
+        var theme = {
+            color: [
+                '#26B99A', '#34495E', '#BDC3C7', '#3498DB',
+                '#9B59B6', '#8abb6f', '#759c6a', '#bfd3b7'
+            ],
+            title: {
+                itemGap: 8,
+                textStyle: {
+                    fontWeight: 'normal',
+                    color: '#408829'
+                }
+            },
+            dataRange: {
+                color: ['#1f610a', '#97b58d']
+            },
+            textStyle: {
+                fontFamily: 'Arial, Verdana, sans-serif'
+            }
+        };
+
+        var echartPie = echarts.init(document.getElementById('echart_pie'), theme);
+        echartPie.setOption({
+            legend: {
+                x: 'center',
+                y: 'bottom',
+                data: nameHolder
+            },
+            calculable: true,
+            series: [{
+                name: 'Ortalama',
+                type: 'pie',
+                radius: '55%',
+                center: ['50%', '48%'],
+                data: json_data
+            }]
+        });
+
+        var dataStyle = {
+            normal: {
+                label: {
+                    show: false
+                },
+                labelLine: {
+                    show: false
+                }
+            }
+        };
     }
 };
+
 
 jQuery(document).ready(jQuery.proxy(BaklavaBorekMatik.onReady, BaklavaBorekMatik));
