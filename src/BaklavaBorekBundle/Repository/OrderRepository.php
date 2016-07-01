@@ -12,4 +12,52 @@ use Doctrine\ORM\EntityRepository;
  */
 class OrderRepository extends EntityRepository
 {
+    public function getLiars(){
+        return $this->createQueryBuilder("liars")
+            ->select(array("liars"))
+            ->andwhere("liars.purchaseDate is null")
+            ->andwhere("liars.willPurchaseDate < :willPurchaseDate")
+            ->setParameter("willPurchaseDate", date("Y-m-d H:i:s", time()))
+            ->getQuery()->getResult();
+    }
+
+    public function getCorrectNumber($userId){
+        return $this->createQueryBuilder("liars")
+            ->select("COUNT(liars)")
+            ->where("liars.purchaseDate is not null")
+            ->andwhere("liars.userId = :u_id")
+            ->setParameter("u_id", $userId)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    public function getHunted(){
+        return $this->createQueryBuilder("hunted")
+            ->select(array("hunted", "u.name", "u.surname"))
+            ->innerJoin('BaklavaBorekBundle\Entity\user', 'u', 'WITH', 'u.id = hunted.userId')
+            ->addSelect("COUNT(hunted.userId) as piece")
+            ->groupBy("hunted.userId")
+            ->orderBy("piece", "DESC")
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function getHonest(){
+        return $this->createQueryBuilder("honest")
+            ->select(array("honest", "u.id", "u.name", "u.surname"))
+            ->innerJoin('BaklavaBorekBundle\Entity\user', 'u', 'WITH', 'u.id = honest.userId')
+            ->addSelect("COUNT(honest.userId) as piece")
+            ->andwhere("honest.purchaseDate is not null")
+            ->andwhere("honest.purchaseDate <= honest.willPurchaseDate")
+            ->groupBy("honest.userId")
+            ->getQuery()->getResult();
+    }
+
+    public function getAvarage(){
+        return $this->createQueryBuilder("avarage")
+            ->select(array("avarage"))
+            ->where("avarage.purchaseDate > avarage.willPurchaseDate")
+            ->getQuery()
+            ->getResult();
+    }
 }

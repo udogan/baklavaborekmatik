@@ -1,5 +1,167 @@
 {% extends "BaklavaBorekBundle::layout.html.twig" %}
 
 {% block content %}
-    Rapor Sayfası
+
+    <div class="page-title" style="margin-bottom: 50px">
+        <div class="title_left">
+            <h3>{{ "Report" | trans }}</h3>
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert alert-info alert-dismissible fade in" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+                </button>
+                <strong>{{ "The number of days of delay Liar" | trans }}: </strong> {{ avarage }}~
+            </div>
+        </div>
+
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>{{ "Most Liar Who" | trans }}</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>{{ "Name" | trans }}</th>
+                            <th>{{ "Total Lie" | trans }}</th>
+                            <th>{{ "Total Correct" | trans }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {% for liar in liars["users"] %}
+                                <tr>
+                                    <td>{{ liar.userId.Id }}</td>
+                                    <td>{{ liar.userId }}</td>
+                                    <td>{{ liars["liars_count"][liar.userId.Id] }}</td>
+                                    <td>{{ liars["correct_number"][liar.userId.Id] }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>{{ "Most Who Hunted" | trans }}</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>{{ "Name" | trans }}</th>
+                            <th>{{ "Received Penalty" | trans }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for hunted in hunted_list %}
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>{{ hunted.name }} {{ hunted.surname }}</td>
+                                <td>{{ hunted.piece }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>{{ "Most Who Catch" | trans }}</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>{{ "Name" | trans }}</th>
+                            <th>{{ "How Many Times Did Hunt" | trans }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for hunter in hunter_list %}
+                            <tr>
+                                <td>{{ hunter.id }}</td>
+                                <td>{{ hunter.name }} {{ hunter.surname }}</td>
+                                <td>{{ hunter.piece }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>{{ "The Plant in Most People" | trans }}</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>{{ "Name" | trans }}</th>
+                            <th>{{ "How Many Times Have Hunted" | trans }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for honest in honest_list %}
+                            <tr>
+                                <td>{{ honest.id }}</td>
+                                <td>{{ honest.name }} {{ honest.surname }}</td>
+                                <td>{{ honest.piece }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
+        <div id="pieChart" class="col-md-12 col-sm-12 col-xs-12" data-pie="{{ pie|json_encode() }}">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>{{ "Most ignored those" | trans }}</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+
+                    <div id="echart_pie" style="height:350px;"></div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+    </div>
 {% endblock %}
