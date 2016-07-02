@@ -12,16 +12,19 @@ use Doctrine\ORM\EntityRepository;
  */
 class OrderRepository extends EntityRepository
 {
-    public function getLiars(){
-        return $this->createQueryBuilder("liars")
+    public function getLiars()
+    {
+        $qb = $this->createQueryBuilder("liars");
+        return $qb
             ->select(array("liars"))
-            ->andwhere("liars.purchaseDate is null")
-            ->andwhere("liars.willPurchaseDate < :willPurchaseDate")
+            ->where("liars.willPurchaseDate < :willPurchaseDate")
+            ->andWhere(join(" OR ", array($qb->expr()->orX("liars.purchaseDate is null", $qb->expr()->orX("liars.willPurchaseDate < liars.purchaseDate")))))
             ->setParameter("willPurchaseDate", date("Y-m-d H:i:s", time()))
             ->getQuery()->getResult();
     }
 
-    public function getCorrectNumber($userId){
+    public function getTotalPurchaseCountOfUser($userId)
+    {
         return $this->createQueryBuilder("liars")
             ->select("COUNT(liars)")
             ->where("liars.purchaseDate is not null")
@@ -31,7 +34,8 @@ class OrderRepository extends EntityRepository
             ->getSingleScalarResult();
     }
 
-    public function getHunted(){
+    public function getHunted()
+    {
         return $this->createQueryBuilder("hunted")
             ->select(array("hunted", "u.name", "u.surname"))
             ->innerJoin('BaklavaBorekBundle\Entity\user', 'u', 'WITH', 'u.id = hunted.userId')
@@ -42,7 +46,8 @@ class OrderRepository extends EntityRepository
             ->getResult();
     }
 
-    public function getHonest(){
+    public function getHonest()
+    {
         return $this->createQueryBuilder("honest")
             ->select(array("honest", "u.id", "u.name", "u.surname"))
             ->innerJoin('BaklavaBorekBundle\Entity\user', 'u', 'WITH', 'u.id = honest.userId')
@@ -53,7 +58,8 @@ class OrderRepository extends EntityRepository
             ->getQuery()->getResult();
     }
 
-    public function getAvarage(){
+    public function getAvarage()
+    {
         return $this->createQueryBuilder("avarage")
             ->select(array("avarage"))
             ->where("avarage.purchaseDate > avarage.willPurchaseDate")

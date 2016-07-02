@@ -6,7 +6,6 @@
     <table class="measurement-data-table table table-striped table-bordered">
         <thead>
         <tr>
-            <th>{{ "ID" | trans }}</th>
             <th>{{ "Measurement Name" | trans }}</th>
             <th>{{ "Created Time" | trans }}</th>
             <th>{{ "Updated Time" | trans }}</th>
@@ -17,7 +16,6 @@
         <tbody>
         {% for measurement in measurements %}
             <tr>
-                <td>{{ measurement.id }}</td>
                 <td>{{ measurement.name }}</td>
                 <td>{{ measurement.created|date('Y-m-d H:i') }}</td>
                 <td>{{ measurement.updated|date('Y-m-d H:i') }}</td>

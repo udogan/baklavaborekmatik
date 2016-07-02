@@ -13,58 +13,70 @@ use Symfony\Component\HttpFoundation\Request;
  * @package BaklavaBorekBundle\Controller
  * @Route("/report")
  */
-class ReportController extends Controller{
+class ReportController extends Controller
+{
     /**
      * @Route("/", name="BaklavaBorekBundle_Report_index")
      */
-    public function indexAction(Request $request){
+    public function indexAction(Request $request)
+    {
         $em = $this->getDoctrine()->getManager();
+        $orderRepository = $em->getRepository('BaklavaBorekBundle:Order');
+        $mailDetailRepository = $em->getRepository('BaklavaBorekBundle:MailDetail');
+        $itemRepository = $em->getRepository('BaklavaBorekBundle:Item');
 
-        /* Liars Avarage */
-        $day = 0;
-        $avarage = $em->getRepository('BaklavaBorekBundle:Order')->getAvarage();
-        if(count($avarage) > 0){
-            for($i=0; $i<count($avarage); $i++){
-                $day = (($avarage[$i]->getPurchaseDate()->getTimestamp()-$avarage[$i]->getWillPurchaseDate()->getTimestamp())/(60*60*24));
+        /* Liars Day Average */
+        $day = $average = 0;
+        $purchaseDatePassed = $orderRepository->getAvarage();
+        if (count($purchaseDatePassed) > 0) {
+            for ($i = 0; $i < count($purchaseDatePassed); $i++) {
+                $day += (($purchaseDatePassed[$i]->getPurchaseDate()->getTimestamp() - $purchaseDatePassed[$i]->getWillPurchaseDate()->getTimestamp()) / (60 * 60 * 24));
             }
-            $avarage = $day / count($avarage);
+            $average = ceil($day / count($purchaseDatePassed));
         }
 
 
-        /* The Liar */
-        $liars = $em->getRepository('BaklavaBorekBundle:Order')->getLiars();
-        $liars_array = array();
-        $liars_m = array("users" => array());
-        for($i=0; $i<count($liars); $i++){
-            if(array_search($liars[$i]->getUserId()->getId(), $liars_array) === false){
-                array_push($liars_array, $liars[$i]->getUserId()->getId());
-                array_push($liars_m["users"], $liars[$i]);
+        /* Liars (Shame Table) */
+        $liarsList = $orderRepository->getLiars();
+        $liars = array();
+        foreach ($liarsList as $l) {
+            $user = $l->getUserId();
+            $userId = $user->getId();
+            if (!isset($liars[$userId])) {
+                $liars[$userId] = array();
+                $liars[$userId]["nameSurname"] = (string) $user;
+                $liars[$userId]["totalOrderCount"] = count($orderRepository->findByUserId($userId));
+                $liars[$userId]["totalPurchaseCount"] = $orderRepository->getTotalPurchaseCountOfUser($userId);
+                $liars[$userId]["totalLieCount"] = 1;
+            } else {
+                $liars[$userId]["totalLieCount"]++;
             }
-
-            $liars_m["correct_number"][$liars[$i]->getUserId()->getId()] = $em->getRepository('BaklavaBorekBundle:Order')->getCorrectNumber($liars[$i]->getUserId()->getId());
-            $liars_m["liars_count"][$liars[$i]->getUserId()->getId()] = ((isset($liars_m["liars_count"][$liars[$i]->getUserId()->getId()])) === false ? 1 : $liars_m["liars_count"][$liars[$i]->getUserId()->getId()] + 1);
         }
-        
+        // Sort according to lie count desc order
+        usort($liars, function($l1, $l2) {
+            return $l2["totalLieCount"] - $l1["totalLieCount"];
+        });
 
-        /* Most Who Hunted */
-        $hunted = $em->getRepository('BaklavaBorekBundle:Order')->getHunted();
+        /* Top Hunted */
+        $hunted = $orderRepository->getHunted();
 
-        /* Most Who Catch */
-        $hunter = $em->getRepository('BaklavaBorekBundle:MailDetail')->getHunter();
+        /* Top Hunter */
+        $hunter = $mailDetailRepository->getHunter();
 
-        /* The Plant in Most People */
-        $honest = $em->getRepository('BaklavaBorekBundle:Order')->getHonest();
+        /* Top Honest */
+        $honest = $orderRepository->getHonest();
 
-        /* Pie Graph Avarage */
-        $pie = $em->getRepository('BaklavaBorekBundle:Item')->getPie();
+        /* Pie Graph Average */
+        $pie = $itemRepository->getPie();
 
         return $this->render('BaklavaBorekBundle:Report:index.html.twig', array(
-            "avarage"     => $avarage,
-            "liars"       => $liars_m,
-            "hunted_list" => $hunted,
-            "hunter_list" => $hunter,
-            "honest_list" => $honest,
-            "pie"         => $pie
-        ));
+                "average" => $average,
+                "liars" => $liars,
+                "huntedList" => $hunted,
+                "hunterList" => $hunter,
+                "honestList" => $honest,
+                "pie" => $pie
+            )
+        );
     }
 }

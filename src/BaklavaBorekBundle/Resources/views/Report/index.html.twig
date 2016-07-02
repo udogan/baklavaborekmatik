@@ -15,7 +15,7 @@
             <div class="alert alert-info alert-dismissible fade in" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
                 </button>
-                <strong>{{ "The number of days of delay Liar" | trans }}: </strong> {{ avarage }}~
+                <strong>{{ "The number of days of delay Liar" | trans }} &cong; </strong> {{ average }}
             </div>
         </div>
 
@@ -30,19 +30,19 @@
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th>#</th>
                             <th>{{ "Name" | trans }}</th>
-                            <th>{{ "Total Lie" | trans }}</th>
-                            <th>{{ "Total Correct" | trans }}</th>
+                            <th>{{ "Total Order" | trans }}</th>
+                            <th>{{ "Total Lie (Late Purchases Included)" | trans }}</th>
+                            <th>{{ "Total Purchase" | trans }}</th>
                         </tr>
                         </thead>
                         <tbody>
-                            {% for liar in liars["users"] %}
+                            {% for liar in liars %}
                                 <tr>
-                                    <td>{{ liar.userId.Id }}</td>
-                                    <td>{{ liar.userId }}</td>
-                                    <td>{{ liars["liars_count"][liar.userId.Id] }}</td>
-                                    <td>{{ liars["correct_number"][liar.userId.Id] }}</td>
+                                    <td>{{ liar["nameSurname"] }}</td>
+                                    <td>{{ liar["totalOrderCount"] }}</td>
+                                    <td>{{ liar["totalLieCount"] }}</td>
+                                    <td>{{ liar["totalPurchaseCount"] }}</td>
                                 </tr>
                             {% endfor %}
                         </tbody>
@@ -64,15 +64,13 @@
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th>#</th>
                             <th>{{ "Name" | trans }}</th>
                             <th>{{ "Received Penalty" | trans }}</th>
                         </tr>
                         </thead>
                         <tbody>
-                        {% for hunted in hunted_list %}
+                        {% for hunted in huntedList %}
                             <tr>
-                                <th scope="row">1</th>
                                 <td>{{ hunted.name }} {{ hunted.surname }}</td>
                                 <td>{{ hunted.piece }}</td>
                             </tr>
@@ -96,15 +94,13 @@
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th>#</th>
                             <th>{{ "Name" | trans }}</th>
-                            <th>{{ "How Many Times Did Hunt" | trans }}</th>
+                            <th>{{ "Hunt Count" | trans }}</th>
                         </tr>
                         </thead>
                         <tbody>
-                        {% for hunter in hunter_list %}
+                        {% for hunter in hunterList %}
                             <tr>
-                                <td>{{ hunter.id }}</td>
                                 <td>{{ hunter.name }} {{ hunter.surname }}</td>
                                 <td>{{ hunter.piece }}</td>
                             </tr>
@@ -128,15 +124,13 @@
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th>#</th>
                             <th>{{ "Name" | trans }}</th>
-                            <th>{{ "How Many Times Have Hunted" | trans }}</th>
+                            <th>{{ "Hunted Count" | trans }}</th>
                         </tr>
                         </thead>
                         <tbody>
-                        {% for honest in honest_list %}
+                        {% for honest in honestList %}
                             <tr>
-                                <td>{{ honest.id }}</td>
                                 <td>{{ honest.name }} {{ honest.surname }}</td>
                                 <td>{{ honest.piece }}</td>
                             </tr>

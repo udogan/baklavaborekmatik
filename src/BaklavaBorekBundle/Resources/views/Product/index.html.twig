@@ -6,7 +6,6 @@
     <table class="product-data-table table table-striped table-bordered">
         <thead>
         <tr>
-            <th>{{ "ID" | trans }}</th>
             <th>{{ "Product Name" | trans }}</th>
             <th>{{ "Created Time" | trans }}</th>
             <th>{{ "Updated Time" | trans }}</th>
@@ -17,7 +16,6 @@
         <tbody>
         {% for product in products %}
             <tr>
-                <td>{{ product.id }}</td>
                 <td>{{ product.name }}</td>
                 <td>{{ product.created|date('Y-m-d H:i') }}</td>
                 <td>{{ product.updated|date('Y-m-d H:i') }}</td>

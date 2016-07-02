@@ -142,13 +142,13 @@ var BaklavaBorekMatik = {
         var userDataTable = jQuery.extend(this.defaultDataTableOptions(), {"order": [4, "desc"]});
         jQuery(".user-data-table").dataTable(userDataTable);
 
-        var orderDataTable = jQuery.extend(this.defaultDataTableOptions(), {"order": [3, "desc"]});
+        var orderDataTable = jQuery.extend(this.defaultDataTableOptions(), {"order": [2, "desc"]});
         jQuery(".order-data-table").dataTable(orderDataTable);
 
-        var measurementDataTable = jQuery.extend(this.defaultDataTableOptions(), {"order": [3, "desc"]});
+        var measurementDataTable = jQuery.extend(this.defaultDataTableOptions(), {"order": [2, "desc"]});
         jQuery(".measurement-data-table").dataTable(measurementDataTable);
 
-        var productDataTable = jQuery.extend(this.defaultDataTableOptions(), {"order": [3, "desc"]});
+        var productDataTable = jQuery.extend(this.defaultDataTableOptions(), {"order": [2, "desc"]});
         jQuery(".product-data-table").dataTable(productDataTable);
 
         if (jQuery("#order-form-wrapper").length) {
@@ -196,7 +196,9 @@ var BaklavaBorekMatik = {
             });
         }
 
-        this.pieChart();
+        if (jQuery("#pieChart").length) {
+            this.pieChart();
+        }
     }
 };
 
